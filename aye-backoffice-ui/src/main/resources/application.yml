@@ -1,0 +1,30 @@
+welcome:
+  message: Hello to AYE
+
+msales:
+  base-url: "http://localhost:8080/msales/api"
+
+server:
+  servlet:
+    context-path: /AYE
+  port: 9091
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: false
+  template:
+    cache: false
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+logging:
+  level:
+    org.springframework: INFO
+#    org.springframework.data.couchbase.repository.query: DEBUG
+#    org.hibernate: ERROR
+#    com.aye: INFO
+#    root: ERROR

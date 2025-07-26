@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>EasyAutocomplete Example</title>
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/easy-autocomplete.min.css">-->
+  <link rel="stylesheet" th:href="@{/css/easyAutocomplete/easy-autocomplete.min.css}">
+
+</head>
+<body>
+
+<h1>EasyAutocomplete Example</h1>
+
+<input id="department"/>
+<input id="rr"/>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/jquery.easy-autocomplete.min.js"></script>-->
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jqueryAutoComplete/jquery-1.11.2.min.js}"></script>
+<script th:src="@{/js/jqueryAutoComplete/jquery.easy-autocomplete.min.js}"></script>
+<script th:src="@{/js/jqueryAutoComplete/autocompleteInvOrg.js}"></script>
+
+<script>
+  // $(document).ready(function() {
+  //   var options = {
+  //     url: "https://dummyjson.com/products/1",
+  //     getValue: "title",
+  //     list: {
+  //       match: {
+  //         enabled: true
+  //       }
+  //     }
+  //   };
+  //
+  //   $("#basics").easyAutocomplete(options);
+  // });
+
+  $(document).ready(function() {
+    var options = {
+      url: 'http://localhost:9090/departmentData',
+
+      getValue: 'name',
+
+      list: {
+
+
+        onSelectItemEvent: function () {
+          var value = $("#ii").getSelectedItemData().id;
+          console.log(value);
+          $("#rr").val(value).trigger("change");
+        },
+        match: {
+          enabled: true
+        }
+      }
+    };
+
+    $('#ii').easyAutocomplete(options);
+  });
+
+</script>
+
+</body>
+</html>

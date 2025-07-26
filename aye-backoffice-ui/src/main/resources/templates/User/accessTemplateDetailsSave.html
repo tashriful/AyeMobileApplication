@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/layout">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--    autocomplete dependencies-->
+    <link rel="stylesheet" th:href="@{/css/easyAutocomplete/easy-autocomplete.min.css}">
+    <script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
+    <script th:src="@{/js/jqueryAutoComplete/jquery.easy-autocomplete.min.js}"></script>
+    <script th:src="@{/js/jqueryAutoComplete/autocompleteTemplateDetails.js}"></script>
+
+    <title>Access Template Details</title>
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div style="margin: auto;width: 70%" class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Access Template Details</h3>
+                    <div th:if="${message != null}"
+                         style="width: 100%;margin:0 auto;"
+                         class="alert alert-info align-content-center" role="alert">
+                        <span style="color: red" th:if="${message != null}" th:text="${message}"></span>
+                    </div>
+                    <div th:if="${param.message != null}" class="alert align-content-center"
+                         style="width: 100%;margin:0 auto;">
+                        <p style="color: green;font-weight: bold" th:text="${param.message}"></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{'/accessTemplateDetailsPage/' + ${templateId}}"
+                          th:object="${accessTemplateDetailsDto}" method="post">
+                        <div class=" col-sm-12">
+
+                            <input type="hidden" th:if="*{id != null}" th:field="*{id}" class="form-control" id="id"
+                                   name="id" required>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="tmplDetailName">Template Details Neme :</label>
+                                    <input type="text" th:field="*{tmplDetailName}" class="form-control"
+                                           id="tmplDetailName"
+                                           name="tmplDetailName" required>
+                                </div>
+                            </div>
+
+                            <input type="hidden" th:field="*{userAccessTemplateM.id}" id="userAccessTemplateM">
+
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <label for="inputUserMenuM">User Menu:</label>
+                                    <input type="text" class="form-control"
+                                           id="inputUserMenuM" required>
+                                    <input type="hidden" th:field="*{userMenuM.id}" name="userMenuId" id="userMenuId">
+                                    <div th:if="*{userMenuM.menuName != null}">
+                                        <span style="font-weight: bold" th:text="*{userMenuM.menuName}"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group required">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" th:field="*{startDate}" class="form-control"
+                                           id="startDate" name="startDate" required>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group required">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" th:field="*{endDate}" class="form-control"
+                                           id="endDate" name="endDate">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <label for="inputOrgHierarchy">Organization:</label>
+                                    <input type="text" class="form-control"
+                                           id="inputOrgHierarchy" required>
+                                    <input type="hidden" th:field="*{orgHierarchyM.id}" name="orgHierarchyId"
+                                           id="orgHierarchyId">
+                                    <div th:if="*{orgHierarchyM.code != null}">
+                                        <span style="font-weight: bold" th:text="*{orgHierarchyM.code}"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 text-right">
+                                <a th:if="*{id != null}" th:href="@{'/invOrgAccessPage/' + ${templateId} + '/'  + ${accessTemplateDetailsDto.id} + '/'  + ${accessTemplateDetailsDto.orgHierarchyM.id}}" class="btn btn-primary">Inv Org Access</a>
+                                <a th:href="@{'/accessTemplateDetailsPage/' + ${templateId}}" class="btn btn-primary">New</a>
+                                <button type="submit" value="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="form-group col-sm-12" style="margin-top: 5%">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Template Details Name</th>
+                                <th scope="col">Menu Name</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Org</th>
+                                <!--                                <th scope="col">Action</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="a : ${accessTemplateDetailsDtos}">
+                                <td th:text="${a.tmplDetailName}"></td>
+                                <td th:text="${a.userMenuM.menuName}"></td>
+                                <td th:text="${a.startDate}"></td>
+                                <td th:text="${a.endDate}"></td>
+                                <td th:text="${a.orgHierarchyM.code}"></td>
+                                <td>
+                                    <a class="btn btn-success"
+                                       th:href="@{'/accessTemplateDetailsPage/' + ${templateId} + '/'+ ${a.id}}"><span
+                                            class="glyphicon glyphicon-edit"></span></a>
+                                    <!--                                    || <a class="btn btn-danger" th:href="@{'/user/delete/' + ${u.id}}"><span-->
+                                    <!--                                        class="glyphicon glyphicon-remove-circle"></span></a>-->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

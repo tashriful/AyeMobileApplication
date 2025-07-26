@@ -1,0 +1,1 @@
+{"options":{"viewOn":"ORD_ORDER_HEADER_M","pipeline":[{"$unwind":{"path":"$orderLineMList"}},{"$lookup":{"from":"ORD_ORDER_LINE_M","localField":"orderLineMList.$id","foreignField":"_id","as":"order_lines"}}]},"indexes":[],"collectionName":"orders view","type":"view"}

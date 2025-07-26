@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: MAIN-ORDER-SERVICE
+          uri: lb://MAIN-ORDER-SERVICE
+          predicates:
+            - Path=/msales/api/main/**
+          filters:
+            - AuthenticationFilter
+
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/msales/api/user/**
+          filters:
+            - AuthenticationFilter
+
+        - id: DELIVERY-SCHEDULE-SERVICE
+          uri: lb://DELIVERY-SCHEDULE-SERVICE
+          predicates:
+            - Path=/msales/api/dlv/**
+          filters:
+            - AuthenticationFilter
+
+        - id: AUTH-SERVICE
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/msales/api/auth/**
+          filters:
+            - AuthenticationFilter
+
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://172.20.1.225:8760/eureka
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+server:
+  port: 8080
+
+
+

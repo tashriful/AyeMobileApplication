@@ -1,0 +1,257 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="fragments/layout">
+<head>
+    <link th:insert="Ar/arScriptLink"/>
+    <script th:src="@{/js/ar/arReceipts.js}"></script>
+
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div class="row">
+        <div class="col-sm-10">
+            <!--<div class="container">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="form-group col-sm-12  jepg_cust_head">
+                    <div class="form-group col-sm-5 " style="padding-left: 0; color: #172D44">Charge Entry - <b
+                            th:text="${arInvoiceHeader.invoiceNumber}"></b></div>
+                </div>
+                <div class="panel-body">
+
+                    <form th:action="@{'/ArInvoice/arInvoiceLines/'+${mode}+'/'+${pageId}+'/'+${temltId}+'/'+${arInvoiceHeader.id}}"
+                          th:object="${arInvoiceLines}" th:method="post">
+
+
+                        <span style="font-weight: bold" th:each="m :${msg}">
+                            <p th:style="${m.tag} ? 'color:#ed1c24;':'color:#4aa509;'">
+                                <span th:if="${m.tag==null}" th:text="${m.msg}"> </span>
+                                <span th:unless="${m.tag==null}" th:text="${m.tag+' '+m.msg}"></span>
+                            </p></span>
+
+
+                        <div class="submit-progress hidden">
+                            <label th:style="'color:#4aa509;'">Please wait while Saving Data...</label>
+                        </div>
+
+                        <span style="font-weight: bold" th:each="m :${msg}">
+                            <p th:style="${m.tag} ? 'color:#ed1c24;':'color:#4aa509;'">
+                                <span th:if="${m.tag==null}" th:text="${m.msg}"> </span>
+                                <span th:unless="${m.tag==null}" th:text="${m.tag+' '+m.msg}"></span>
+                            </p></span>
+
+                        <div>
+                            <input type="hidden" class="form-control" id="inputId"
+                                   th:field="*{id}"/>
+                            <input type="hidden" class="form-control" id="inputarInvoiceHeader"
+                                   th:field="*{arInvoiceHeader}"/>
+
+                            <span class="help-block" th:if="${#fields.hasErrors('id')}"
+                                  th:errors="*{id}">Name Error</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputmasterItem">Description& Item</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+
+                            <div class="col-sm-4 ">
+                                <input class="form-control ff" type="text" id="inputdesc"
+                                       th:field="*{desc}"
+                                       required="required"/>
+                            </div>
+
+                            <div class="col-sm-4 ">
+
+                                <input class="form-control" id="inputmasterItem"
+                                        th:field="*{masterItem}" />
+                                <input type="hidden" class="form-control" id="inputmasterItemId"
+                                       th:field="*{masterItem.id.id}"/>
+                                <input type="hidden" class="form-control" id="inputmasterItemInvOrgId"
+                                       th:field="*{masterItem.id.inventoryInformations.id}"/>
+                                <input class="form-control ff" type="hidden" id="inputdeliveryLine"
+                                       th:field="*{deliveryLine}" />
+
+                                <input type="text" class="form-control" id="inputitemCode"
+                                       th:field="*{itemCode}"/>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputpriceListLine">Amount</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+
+                            <div class="col-sm-2 ">
+
+
+                                <input class="form-control" type="text" id="inputdefaultUom"
+                                       th:field="*{defaultUom}" />
+
+                                <input class="form-control" type="text" id="inputdefaultUomCode" placeholder="UomCode"
+                                       th:field="*{defaultUomCode}" />
+
+                            </div>
+
+                            <div class="col-sm-2 ">
+
+                                <input class="form-control" type="text" id="inputpriceListLine"
+                                       th:field="*{priceListLine}" />
+
+                                <input class="form-control" type="text" id="inputunitListPrice"
+                                       th:field="*{unitListPrice}" />
+
+                                <input class="form-control" type="text" id="inputunitSellingPrice"
+                                       th:field="*{unitSellingPrice}" />
+
+                            </div>
+
+                            <div class="col-sm-2 ">
+
+
+                                <input class="form-control" type="text" id="inputdefaultUomQty"
+                                       th:field="*{defaultUomQty}" />
+
+                            </div>
+
+                            <div class="col-sm-2 ">
+
+
+                                <input class="form-control" type="text" id="inputamount" placeholder="Amount"
+                                       th:field="*{amount}" />
+                                <input class="form-control" type="text" id="inputbaseAmount"
+                                       th:field="*{baseAmount}" />
+                                <input class="form-control" type="text" id="inputaccCodeCombinitions"
+                                       th:field="*{accCodeCombinitions}" />
+
+                                <input class="form-control" type="text" id="inputaccCodeCombinitionsV"
+                                       th:field="*{accCodeCombinitionsV}" />
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group ">
+                            <!--<label for="inputid">Name</label>-->
+                            <input type="hidden" class="form-control" id="inputcolumn" placeholder="column"
+                                   th:field="*{column.createdBy}" name="column"/>
+                            <!--<input type="text" class="form-control" id="inputinvtrnsName" placeholder="Inv Trns Name" th:field="*{transactionName}" name="transactionName"/>-->
+                                <span class="help-block" th:if="${#fields.hasErrors('column.createdBy')}"
+                                      th:errors="*{column.createdBy}">User Name Error</span>
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="inputid">Name</label>-->
+                            <input type="hidden" class="form-control" id="inputcolumnDate" placeholder="columnDate"
+                                   th:field="*{column.creationDate}" name="columnDate"/>
+                            <!--<input type="text" class="form-control" id="inputinvtrnsName" placeholder="Inv Trns Name" th:field="*{transactionName}" name="transactionName"/>-->
+                                <span class="help-block" th:if="${#fields.hasErrors('column.creationDate')}"
+                                      th:errors="*{column.creationDate}">User Name Error</span>
+                        </div>
+
+                        <div>
+                            <button type="button" data-toggle="modal" data-target="#modal-RecordHistory" th:id="btnId"
+                                    th:attr="data-target='#modal-RecordHistory'" title="Record History">
+                                <span class="glyphicon glyphicon-record"></span>
+                            </button>
+                            <script th:inline="javascript">
+                                document.getElementById('btnId').onclick =
+                                        function () {
+                                            var obj = [[${arInvoiceLines.column}]];
+
+                                            histabledataset(obj);
+                                        };
+
+                            </script>
+
+                        </div>
+
+
+                        <div class="form-group  col-sm-12 text-right Padding10px">
+                            <a th:href="@{'/ArReceipts/arReceiptCharges/E/'+${pageId}+'/'+${temltId}+'/'+${arInvoiceHeader.id}}"
+                               class="btn btn-default">New</a>
+                                 <!--<span th:if="${arReceipts.arReceiptStatus==T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).N}">-->
+                                <button type="submit" name="save" class="btn btn-primary"
+                                        onclick="return checkemptybankLine()">Save
+                                </button>
+
+
+
+                                <!--</span>-->
+
+
+                                <span>
+
+                                <a th:href="@{'/ArReceipts/arReceipt/U/'+${pageId}+'/'+${temltId}+'/'+${arInvoiceHeader.id}}"
+                                   class="btn btn-default">Back</a>
+                                </span>
+
+
+                        </div>
+
+
+                    </form>
+                    <div data-th-replace="fragments/recordHistoryModal :: recordhis-modal"></div>
+
+                    <div class="form-group col-sm-12">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Desc</th>
+                            <th>Edit</th>
+                            </thead>
+                            <tbody>
+                            <div>
+                                <tr th:each="c : ${arInvoiceLinesList}">
+                                    <td th:text="${c.id}"></td>
+                                    <td th:text="${c.unitSellingPrice}"></td>
+                                    <td th:text="${c.amount}"></td>
+                                    <td th:text="${c.desc}"></td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="..." name="edit">
+                                            <span>
+                                            <a id="lineID"
+                                               th:href="@{/ArInvoice/arInvoiceLines/U/}+${pageId}+'/'+${temltId}+'/'+${arInvoiceLines.id}+'/'+${c.id}"
+                                               class="btn btn-success"><span
+                                                    class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                </span>
+                                                <span>
+                                                 <a th:href="@{/ArInvoice/arInvoiceLines/E/}+${pageId}+'/'+${temltId}+'/'+${arInvoiceLines.id}+'/'+${c.id}"
+                                                    class="btn btn-danger"><span
+                                                         class="glyphicon glyphicon-remove"
+                                                         aria-hidden="true"></span></a>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+
+
+                <div class="panel-footer">
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+
+</body>
+</html>

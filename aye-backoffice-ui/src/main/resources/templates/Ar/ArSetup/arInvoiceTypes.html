@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="fragments/layout">
+<head>
+    <link th:insert="Ar/arScriptLink"/>
+    <!--</script>-->
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <!--<div class="container">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Manage Receivable Invoice Types</div>
+                <div class="panel-body">
+
+                    <form th:action="@{'/ArSetup/arInvoiceTypes/'+${mode}+'/'+${pageId}+'/'+${temltId}}"
+                          th:object="${arInvoiceTypes}" th:method="post">
+                        <!--+${role.role}  +${role.role}-->
+                        <span style="color: #ed1c24;font-weight: bold" th:text="${msg}"></span>
+
+
+                        <div class="form-group">
+                            <!--<label for="inputid">Name</label>-->
+                            <input type="hidden" class="form-control" id="inputid" placeholder="Id" th:field="*{id}"
+                                   name="id"/>
+                            <!--<input type="hidden" id="inputorgHierarchy"  th:field="*{orgHierarchy}" th:value="*{orgHierarchy}"/>-->
+                            <!--<input type="text" class="form-control" id="inputinvtrnsName" placeholder="Inv Trns Name" th:field="*{transactionName}" name="transactionName"/>-->
+                            <span class="help-block" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">User Name Error</span>
+                        </div>
+
+                        <div th:class="${#fields.hasErrors('orgHierarchy')} ? 'form-group has-error' :'form-group required col-sm-12 ' ">
+                            <label class="col-sm-3 control-label " for="inputorgHierarchy">Organization</label>
+
+                            <div class="col-sm-1 "><b>:</b></div>
+                            <div class="col-sm-8 ">
+                                <select class="form-control" name="orgHierarchy" id="inputorgHierarchy"
+                                        th:field="*{orgHierarchy}" required="required">
+                                    <option value="">Please select One</option>
+                                    <option th:each="o : ${orgHierarchies}"
+                                            th:value="${o.id}"
+                                            th:text="${o.code}"
+                                            th:attr="data-seghdr=${o.keySegmentHeader.id},data-seglinecode=${o.segmentLine.code}">
+                                    </option>
+                                </select>
+
+                                <input type="hidden" id="lockeySegmentHeader"
+                                       th:field="*{orgHierarchy.keySegmentHeader.id}"
+                                       th:value="*{orgHierarchy}"/>
+                                <input type="hidden" id="locsegmentLine"
+                                       th:field="*{orgHierarchy.segmentLine.code}"
+                                       th:value="*{orgHierarchy}"/>
+
+                                <p th:errors="*{orgHierarchy}" class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div th:class="${#fields.hasErrors('name')} ? 'form-group has-error' :'form-group required col-sm-12 ' ">
+                            <label class="col-sm-3 control-label " for="inputname">name</label>
+
+                            <div class="col-sm-1 "><b>:</b></div>
+                            <div class="col-sm-4 ">
+                                <input type="text" id="inputname" placeholder="Name"
+                                       name="name" th:field="*{name}" class="form-control"/>
+
+                                <p th:errors="*{name}" class="help-block"></p>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input type="text" id="inpudescription" placeholder="Description"
+                                       name="name" th:field="*{description}" class="form-control"/>
+
+                                <p th:errors="*{description}" class="help-block"></p>
+                            </div>
+                        </div>
+
+
+                        <div th:class="${#fields.hasErrors('arInvoiceType')} ? 'form-group has-error' :'form-group required col-sm-12 ' ">
+                            <label class="col-sm-3 control-label " for="inputarInvoiceType">Type & Nature</label>
+
+                            <div class="col-sm-1 "><b>:</b></div>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="arInvoiceType"
+                                        id="inputarInvoiceType" th:field="*{arInvoiceType}"
+                                        required="required">
+                                    <option value="">Please select One</option>
+                                    <option th:each="module : ${T(com.aye.web.model.ArCommonEnum.ArInvoiceType).values()}"
+                                            th:text="${module}"
+                                            th:value="${module}">module
+                                    </option>
+                                </select>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="arInvoiceSign"
+                                        id="inputarInvoiceSign" th:field="*{arInvoiceSign}"
+                                        required="required">
+                                    <option value="">Please select One</option>
+                                    <option th:each="module : ${T(com.aye.web.model.ArCommonEnum.ArInvoiceSign).values()}"
+                                            th:text="${module.displayName}"
+                                            th:value="${module}">module
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+                        
+
+
+                        
+
+
+                        <div th:class="${#fields.hasErrors('receivableAcc')} ? 'form-group has-error' :'form-group required col-sm-12 ' ">
+                            <label class="col-sm-3 control-label " for="inputreceivableAcc">Receivable Account</label>
+
+                            <div class="col-sm-1 "><b>:</b></div>
+                            <div class="col-sm-8 ">
+                                <input type="hidden" id="inputreceivableAcc"
+                                       name="receivableAcc" th:field="*{receivableAcc}" class="form-control"/>
+
+                                <input type="text" id="inputreceivableAccV" placeholder="Recceivable Account"
+                                       name="receivableAccV" th:field="*{receivableAccV.concatedSegment}" class="form-control"
+                                       th:text="*{receivableAccV?.ccDesc}"/>
+                                <!--<span class="infospan">(By Default Supplier Account Will Debited)</span>-->
+                                <script th:inline="javascript">
+                                    var tmplId = [[${temltId}]];
+                                    $("#inputorgHierarchy").change(function () {
+                                        document.getElementById('inputreceivableAcc').value = '';
+                                        document.getElementById('inputreceivableAccV').value = '';
+                                        document.getElementById('inputreceivableAccV').oninput = function () {
+                                            var lDr = document.getElementById('inputreceivableAccV').value;
+                                            if (lDr.length > 1) {
+                                                var urlval = '/AYE/ACRC/SearchCodeCombByOrg/' + $('#inputreceivableAccV').val() + '/' + $('#inputorgHierarchy').val();
+                                                var displayfield = '#inputreceivableAccV';
+                                                var dbfield = '#inputreceivableAcc';
+                                                var getvalue = 'concatedSegment';
+                                                var templt = 'ccDesc';
+                                                autocomwithtemplate(urlval, getvalue, displayfield, dbfield, templt);
+
+                                            } else {
+                                                document.getElementById('inputreceivableAcc').value = '';
+
+                                            }
+                                            $('#inputreceivableAccV').focus();
+                                        }
+
+                                    });
+
+                                    $(document).ready(function () {
+                                        document.getElementById('inputreceivableAccV').oninput = function () {
+                                            var lDr = document.getElementById('inputreceivableAccV').value;
+                                            if (lDr.length > 1) {
+                                                var urlval = '/AYE/ACRC/SearchCodeCombByOrg/' + $('#inputreceivableAccV').val() + '/' + $('#inputorgHierarchy').val();
+                                                var displayfield = '#inputreceivableAccV';
+                                                var dbfield = '#inputreceivableAcc';
+                                                var getvalue = 'concatedSegment';
+                                                var templt = 'ccDesc';
+                                                autocomwithtemplate(urlval, getvalue, displayfield, dbfield, templt);
+
+                                            } else {
+                                                document.getElementById('inputreceivableAcc').value = '';
+
+                                            }
+                                            $('#inputreceivableAccV').focus();
+
+                                        }
+
+
+                                    });
+
+                                </script>
+
+                                <p th:errors="*{receivableAcc}" class="help-block"></p>
+                            </div>
+                        </div>
+
+
+                        <div th:class="${#fields.hasErrors('glCategories')} ? 'form-group has-error' :'form-group required col-sm-12 ' ">
+                            <label class="col-sm-3 control-label " for="inputglCategories">Gl Categories</label>
+
+                            <div class="col-sm-1 "><b>:</b></div>
+                            <div class="col-sm-8 " >
+                                <select class="form-control" id="inputglCategories"
+                                        th:field="*{glCategories}" name="glCategories" >
+                                    <option value="">Select one</option>
+                                    <option th:each="gc :${glCategoriesList}"
+                                            th:text="${gc.name}"
+                                            th:value="${gc.id}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group required col-sm-12">
+                            <label class="col-sm-3 control-label " for="inputstartDates">Start & End Date</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <!--<input type="excDate" value="01-01-2019" class="form-control" id="inputStartDate" placeholder="yyyy-MM-dd" th:field="*{startDates}"-->
+                                <!--name="startDates" />-->
+                                <input class="form-control" type="date" value="01-01-2019" id="inputstartDates"
+                                       placeholder="yyyy-MM-dd" th:field="*{{startDates}}" name="startDates"/>
+                                <!--<input class="form-control" required="required"  type="excDate"  id="inputfromDate" placeholder="From Date"-->
+                                <!--th:field= "*{fromDate}" th:value="*{fromDate}"-->
+                                <!--name="fromDate" />-->
+                                <span class="help-block" th:if="${#fields.hasErrors('startDates')}"
+                                      th:errors="*{startDates}">From Date Error</span></div>
+                            <div class="col-sm-4 ">
+                                <input class="form-control" type="date" value="01-01-2019" id="inputendDates"
+                                       placeholder="yyyy-MM-dd" th:field="*{{endDates}}" name="endDates"/>
+                                <!--<input class="form-control" required="required"  type="excDate" value="01-01-2019" id="inputtoDate" placeholder="To Date" th:field="*{toDate}" name="toDate" />-->
+                                <span class="help-block" th:if="${#fields.hasErrors('endDates')}"
+                                      th:errors="*{endDates}">To Date Error</span></div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <!--<label for="inputid">Name</label>-->
+                            <input type="hidden" class="form-control" id="inputcolumn" placeholder="column"
+                                   th:field="*{column.createdBy}" name="column"/>
+                            <!--<input type="text" class="form-control" id="inputinvtrnsName" placeholder="Inv Trns Name" th:field="*{transactionName}" name="transactionName"/>-->
+                            <span class="help-block" th:if="${#fields.hasErrors('column.createdBy')}"
+                                  th:errors="*{column.createdBy}">User Name Error</span>
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="inputid">Name</label>-->
+                            <input type="hidden" class="form-control" id="inputcolumn" placeholder="column"
+                                   th:field="*{column.creationDate}" name="column"/>
+                            <!--<input type="text" class="form-control" id="inputinvtrnsName" placeholder="Inv Trns Name" th:field="*{transactionName}" name="transactionName"/>-->
+                            <span class="help-block" th:if="${#fields.hasErrors('column.creationDate')}"
+                                  th:errors="*{column.creationDate}">User Name Error</span>
+                        </div>
+
+                        <div class="col-sm-2 text-left">
+                            <button type="button" data-toggle="modal" data-target="#modal-RecordHistory" th:id="btnIdHM"
+                                    th:attr="data-target='#modal-RecordHistory'" title="Record History">
+                                <span class="glyphicon glyphicon-record"></span>
+                            </button>
+                            <script th:inline="javascript">
+                                document.getElementById('btnIdHM').onclick =
+                                        function () {
+                                            var obj = [[${arInvoiceTypes.column}]];
+                                            histabledataset(obj);
+                                        };
+
+                            </script>
+                        </div>
+
+                        <div class="col-sm-10 text-right">
+                            <a th:href="@{/ArSetup/arInvoiceTypes/E/}+${pageId}+'/'+${temltId}"
+
+                               class="btn btn-default">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Save</button>
+
+
+                        </div>
+
+
+                    </form>
+
+                    <div data-th-replace="fragments/recordHistoryModal :: recordhis-modal"></div>
+
+
+
+                                <div class="form-group">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <!--<th>Org.</th>-->
+                                        <th>Code</th>
+                                        <th>Type</th>
+                                        <th>Name</th>
+                                        <th>DR</th>
+                                        <th>CR</th>
+                                        <th>Start</th>
+                                        <th>End</th>
+                                        <th>Edit</th>
+
+                                    </tr>
+                                    </thead>
+
+                                <tbody>
+                                <div th:if="!${#lists.isEmpty(arInvoiceTypesList)}">
+
+                                <tr th:each="cat : ${arInvoiceTypesList}">
+                                <td th:text="*{cat.orgHierarchy.code}"></td>
+                                <td th:text="*{cat.name}"></td>
+                                <td th:text="*{cat.description}"></td>
+                                <td th:text="*{cat.arInvoiceType.displayName}"></td>
+                                <td th:text="*{cat.receivableAccV?.ccDesc}"></td>
+                                <td th:text="*{{cat.startDates}}">01-01-2019</td>
+                                <td th:text="*{cat.endDates}"></td>
+                                <td>
+                                <div class="btn-group" role="group" aria-label="...">
+                                <a th:href="@{/ArSetup/arInvoiceTypes/U/}+${pageId}+'/'+${temltId}+'/'+${cat.id}"
+                                class="btn btn-success"><span
+                                class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                </div>
+                                </td>
+
+                                </tr>
+                                </div>
+                                <div th:if="${#lists.isEmpty(arInvoiceTypesList)}">
+                                <tr>
+                                <td>No Data exists!</td>
+                                </tr>
+                                </div>
+
+                                </tbody>
+
+                                </table>
+
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/*/ <th:block th:include="fragments/js :: body"></th:block> /*/-->
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+</html>

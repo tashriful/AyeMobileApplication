@@ -1,0 +1,325 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="fragments/layout">
+<head>
+    <link th:insert="Ar/arScriptLink"/>
+    <!--<script th:src="@{/js/ar/arReceiptsSearch.js}"></script>-->
+    <script th:src="@{'/js/ar/arReceiptsSearch.js?paramOne='+${#dates.format(#dates.createNow() , 'dd/MMM/yyyy HH:mm')} }"></script>
+    <!--<?=(new DateTime())->format("YmdHis")?>-->
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-1" >
+            <!--<div class="container">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="form-group col-sm-12  jepg_cust_head">
+                    <div class="form-group col-sm-5 " style="padding-left: 0; color: #172D44">Receipt Search- <b
+                            th:text="${orgHierarchy.name}"></b></div>
+                </div>
+                <div class="panel-body">
+
+                    <form th:action="@{'/ArReceipts/search/'+${mode}+'/'+${pageId}+'/'+${temltId}}"
+                          th:object="${arReceiptSearch}" th:method="post">
+
+
+                        <div class="submit-progress hidden">
+                            <label th:style="'color:#4aa509;'">Please wait while Saving Data...</label>
+                        </div>
+
+                        <span style="font-weight: bold" th:each="m :${msg}">
+                            <p th:style="${m.tag} ? 'color:#ed1c24;':'color:#4aa509;'">
+                                <span th:if="${m.tag==null}" th:text="${m.msg}"> </span>
+                                <span th:unless="${m.tag==null}" th:text="${m.tag+' '+m.msg}"></span>
+                            </p></span>
+
+                        <div>
+                            <input type="hidden" class="form-control" id="inputcollectionId"
+                                   th:field="*{id}"/>
+                            <input type="hidden" class="form-control" id="inputorgHierarchy"
+                                   th:field="*{orgHierarchy}"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('id')}"
+                                  th:errors="*{id}">Name Error</span>
+                            <script th:inline="javascript">
+                                $(document).ready(function () {
+                                    lorgOb = [[${orgHierarchy}]];
+                                });
+                            </script>
+                        </div>
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputarReceiptType">Receipt Number & Types</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <input type="text" class="form-control" id="inputreceiptNumber"
+                                       th:field="*{receiptNumber}"/>
+                            </div>
+                            <div class="col-sm-2 ">
+
+                                <select class="form-control" name="collectionType" id="inputarReceiptType"
+                                        th:field="*{arReceiptType}">
+                                    <option value="">Select</option>
+                                    <option th:each="module : ${T(com.aye.web.model.common.ModeOftrnsactions).values()}"
+                                            th:text="${module}"
+                                            th:value="${module}">module
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 ">
+
+                                <select class="form-control" name="collectionType" id="inputarReceiptClass"
+                                        th:field="*{arReceiptClass}">
+                                    <option value="">Select</option>
+                                    <option th:each="rc : ${arReceiptClassList}"
+                                            th:text="${rc.name}"
+                                            th:value="${rc.id}"
+                                            th:attr="data-cashAcc=${rc.cashAcc.id},data-currency=${rc.currency.id},data-currencyCode=${rc.currency.code}">
+                                        module
+                                    </option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputarReceiptType">Date</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input class="form-control ff" type="date" id="inputFromDate"
+                                       th:field="*{{fromDate}}"
+                                       name="date" />
+                            </div>
+
+                            <div class="col-sm-4 ">
+                                <input class="form-control ff" type="date" id="inputToDate"
+                                       th:field="*{{ToDate}}"
+                                       name="date" />
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputrefNum">Customer &Refrence Num</label>
+
+                            <div class="col-sm-1">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="hidden" id="inputcustomerLine"
+                                       th:field="*{customerLine}" />
+                                <input class="form-control" type="text" id="inputcustomerLineName"
+                                       placeholder="Customer"
+                                       th:field="*{customerLine.name}" text="*{customerLine.siteAddress}"
+                                       th:text="*{customerLine?.siteAddress}"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" id="inputrefNum" placeholder="Ref. Number"
+                                       th:field="*{refNum}" />
+                            </div>
+
+                        </div>
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputbankLine">Bank</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input type="hidden" th:field="*{bankLine.id}" th:name="bankLineId"
+                                       th:value="bankLineId"
+                                       th:id="bankLineId"/>
+
+                                <input class="form-control" type="text" id="inputbankLine"
+                                       placeholder="Bank" th:field="*{bankLine.name}" />
+
+                                <input type="hidden" th:field="*{bankLine}" th:id="bankLineOb"/>
+
+                            </div>
+
+                            <div class="col-sm-4 " id="inputcurrencyEnt">
+                                <select class="form-control" id="inputcurrency"
+                                       th:field="*{currency}" >
+                                    <option value="">Select</option>
+                                    <option th:each="c : ${currencies}"
+                                            th:text="${c.code}"
+                                            th:value="${c.id}">
+                                        module
+                                    </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputamount">Amount</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input class="form-control" type="text" id="inputamountFrom"
+                                       th:field="*{amountFrom}" />
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input class="form-control" type="text" id="inputamountTo"
+                                       th:field="*{amountTo}" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-sm-12" >
+                            <label class="col-sm-3 control-label " for="inputglHeader">GL Document Number</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4 ">
+
+
+                                <input class="form-control" type="hidden" id="inputglHeader"
+                                       th:field="*{glHeader}" />
+                                <input class="form-control" type="text" id="inputglHeaderDoc"
+                                       th:field="*{glHeader.documentNumber}" />
+
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <select class="form-control" type="hidden" id="inputarReceiptStatus"
+                                        th:field="*{arReceiptStatus}">
+                                    <option value="">Select</option>
+                                    <option th:each="module : ${T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).values()}"
+                                            th:text="${module.displayName}"
+                                            th:value="${module}">module
+                                    </option>
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label " for="inputdesc">Note</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-8 ">
+
+
+                                <input class="form-control" type="text" id="inputdesc"
+                                       th:field="*{desc}"/>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="12 text-right">
+                            <a th:href="@{'/ArReceipts/arReceipt/E/'+${pageId}+'/'+${temltId}}"
+                               class="btn btn-default">New</a>
+
+                            <button type="submit" class="btn btn-primary">Search</button>
+
+
+                        </div>
+
+
+
+
+                    </form>
+
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="panel panel-default">
+
+                                <div class="form-group">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                        <tr>
+                                            <!--<th>Org.</th>-->
+                                            <th>Number</th>
+                                            <th>Class</th>
+                                            <th>Date</th>
+                                            <th>Currency</th>
+                                            <th>Amount</th>
+                                            <th>Bank</th>
+                                            <th>Customer</th>
+                                            <th>Status</th>
+                                            <th>Edit</th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <div th:if="!${#lists.isEmpty(arReceiptses)}">
+
+                                            <tr th:each="cat : ${arReceiptses}">
+                                                <td th:text="*{cat.receiptNumber}"></td>
+                                                <td th:text="*{cat.arReceiptClass.name}"></td>
+                                                <td th:text="*{cat.receiptDate}"></td>
+                                                <td th:text="*{cat.currencyCode}"></td>
+                                                <td th:text="*{cat.amount}"></td>
+                                                <td th:text="*{cat.bankLine?.name}"></td>
+                                                <td th:text="*{cat.customerLine?.name}"></td>
+                                                <td th:text="*{cat.arReceiptStatus}"></td>
+                                                <td>
+                                                    <div class="btn-group" role="group" aria-label="...">
+                                                        <a th:href="@{/ArReceipts/arReceipt/U/}+${pageId}+'/'+${temltId}+'/'+${cat.id}"
+                                                           class="btn btn-success"><span
+                                                                class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </div>
+                                        <div th:if="${#lists.isEmpty(arReceiptses)}">
+                                            <tr>
+                                                <td>No Data exists!</td>
+                                            </tr>
+                                        </div>
+
+                                        </tbody>
+
+                                    </table>
+                                    <div data-th-replace="fragments/ouPagination :: page-paginationOu"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="panel-footer">
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+
+</body>
+</html>

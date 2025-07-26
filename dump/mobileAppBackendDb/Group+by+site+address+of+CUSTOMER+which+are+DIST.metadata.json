@@ -1,0 +1,1 @@
+{"options":{"viewOn":"CUSTOMER_LINE_M","pipeline":[{"$match":{"customerTypes":"DIST"}},{"$group":{"_id":"$siteAddress","countOfCustomer":{"$push":"$$ROOT"}}}]},"indexes":[],"collectionName":"Group by site address of CUSTOMER which are DIST","type":"view"}

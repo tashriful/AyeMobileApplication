@@ -1,0 +1,385 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="fragments/layout">
+<head>
+    <link th:insert="Ar/arScriptLink"/>
+    <script th:src="@{/js/ar/arReceipts.js}"></script>
+    <!--<script th:src="@{'/js/ar/arReceipts.js?paramOne='+${#dates.format(#dates.createNow() , 'dd/MMM/yyyy HH:mm')} }"></script>-->
+    <!--<?=(new DateTime())->format("YmdHis")?>-->
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div class="row">
+        <div class="col-sm-9">
+            <!--<div class="container">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="form-group col-sm-12  jepg_cust_head">
+                    <div class="form-group col-sm-5 " style="padding-left: 0; color: #172D44">Receipt Entry- <b
+                            th:text="${orgHierarchy.name}"></b></div>
+                </div>
+                <div class="panel-body">
+
+                    <form th:action="@{'/ArReceipts/arReceipt/'+${mode}+'/'+${pageId}+'/'+${temltId}}"
+                          th:object="${arReceipts}" th:method="post">
+
+
+                        <div class="submit-progress hidden">
+                            <label th:style="'color:#4aa509;'">Please wait while Saving Data...</label>
+                        </div>
+
+                        <span style="font-weight: bold" th:each="m :${msg}">
+                            <p th:style="${m.tag} ? 'color:#ed1c24;':'color:#4aa509;'">
+                                <span th:if="${m.tag==null}" th:text="${m.msg}"> </span>
+                                <span th:unless="${m.tag==null}" th:text="${m.tag+' '+m.msg}"></span>
+                            </p></span>
+
+                        <div>
+                            <input type="hidden" class="form-control" id="inputcollectionId"
+                                   th:field="*{id}"/>
+                            <input type="hidden" class="form-control" id="inputorgHierarchy"
+                                   th:field="*{orgHierarchy}"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('id')}"
+                                  th:errors="*{id}">Name Error</span>
+                            <script th:inline="javascript">
+                                $(document).ready(function () {
+                                    lorgOb = [[${orgHierarchy}]];
+                                });
+                            </script>
+                        </div>
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputarReceiptType">Receipt Types & Date</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-2 ">
+                                <input type="text" class="form-control" id="inputreceiptNumber"
+                                       th:field="*{receiptNumber}" readonly/>
+                            </div>
+                            <div class="col-sm-2 ">
+
+                                <select class="form-control" name="collectionType" id="inputarReceiptType"
+                                        th:field="*{arReceiptType}"
+                                        required="required">
+                                    <option value="">Select</option>
+                                    <option th:each="module : ${T(com.aye.web.model.common.ModeOftrnsactions).values()}"
+                                            th:text="${module}"
+                                            th:value="${module}">module
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 ">
+
+                                <select class="form-control" name="collectionType" id="inputarReceiptClass"
+                                        th:field="*{arReceiptClass}"
+                                        required="required">
+                                    <option value="">Select</option>
+                                    <option th:each="rc : ${arReceiptClassList}"
+                                            th:text="${rc.name}"
+                                            th:value="${rc.id}"
+                                            th:attr="data-cashAcc=${rc.cashAcc.id},data-currency=${rc.currency.id},data-currencyCode=${rc.currency.code}">
+                                        module
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2 ">
+                                <input class="form-control ff" type="date" id="inputreceiptDate"
+                                       th:field="*{{receiptDate}}"
+                                       name="date" required="required"/>
+
+                                <input type="hidden" id="inputcalendarDetail"
+                                       th:field="*{calendarDetail}"/>
+
+                                <input type="hidden" id="inputappModule"
+                                       th:field="*{appModule}"/>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputrefNum">Customer &Refrence Num</label>
+
+                            <div class="col-sm-1">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="hidden" id="inputcustomerLineAccId"
+                                       th:field="*{customerLineAccountId}" required="required"/>
+                                <input class="form-control" type="hidden" id="inputcustomerLine"
+                                       th:field="*{customerLine}" required="required"/>
+                                <input class="form-control" type="text" id="inputcustomerLineName"
+                                       placeholder="Customer"
+                                       th:field="*{customerLine.name}" text="*{customerLine.siteAddress}"
+                                       th:text="*{customerLine?.siteAddress}"
+                                       required="required"/>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <input class="form-control" type="text" id="inputrefNum" placeholder="Ref. Number"
+                                       th:field="*{refNum}" required="required"/>
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <input class="form-control" type="hidden" id="inputarReceiptStatus"
+                                       th:field="*{arReceiptStatus}"/>
+
+                                <input class="form-control" type="text" id="inputarReceiptStatusD"
+                                       th:field="*{arReceiptStatus.displayName}"
+                                       readonly/>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputbankLine">Bank</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input type="hidden" th:field="*{bankLine.id}" th:name="bankLineId"
+                                       th:value="bankLineId"
+                                       th:id="bankLineId"/>
+
+                                <input class="form-control" type="text" id="inputbankLine"
+                                       placeholder="Bank" th:field="*{bankLine.name}" required="required" readonly/>
+
+                                <input type="hidden" th:field="*{bankLine}" th:id="bankLineOb"/>
+                                <input type="hidden" th:field="*{bankAccountId}" id="inputbankAccountId"/>
+
+                            </div>
+
+                            <div class="col-sm-4 " id="inputcurrencyEnt">
+                                <input class="form-control" id="inputcurrency" placeholder="currency"
+                                       type="hidden" th:field="*{currency}" name="currency" required="required"/>
+                                <input class="form-control" type="text" id="inputcurrencyCode"
+                                       th:field="*{currencyCode}" required="required" readonly/>
+
+                            </div>
+
+                        </div>
+
+
+                        <div id="inputexchRateDiv"
+                             th:class="${#fields.hasErrors('exchRate')} ? 'form-group has-error' :'form-group required col-sm-12 ' ">
+                            <label class="col-sm-3 control-label ">Exch Rate & Date</label>
+
+                            <div class="col-sm-1 "><b>:</b></div>
+                            <div class="col-sm-3 ">
+                                <input type="text" id="inputexchRate" placeholder="exchRate"
+                                       name="exchRate" th:field="*{exchRate}" class="form-control"/>
+
+                                <input class="form-control" type="hidden" id="inputorgHierarchyId"
+                                       th:field="*{orgHierarchy.id}"/>
+                                <input class="form-control" type="hidden" id="inputorgHierarchyOb"
+                                       th:field="*{orgHierarchy}"/>
+                                <input class="form-control" type="hidden" id="inputglHeader"
+                                       th:field="*{glHeader}"/>
+
+                                <p th:errors="*{exchRate}" class="help-block"></p>
+
+
+                            </div>
+                            <div class="col-sm-5 " id="inputexchdateDiv">
+                                <input type="date" id="inputexchDate" placeholder="exchDate"
+                                       name="exchRate" th:field="*{exchDate}" class="form-control"/>
+
+                                <p th:errors="*{exchDate}" class="help-block"></p>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-sm-12 required">
+                            <label class="col-sm-3 control-label " for="inputamount">Amount</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input class="form-control" type="text" id="inputamount"
+                                       th:field="*{amount}" required="required" readonly/>
+                            </div>
+                            <div class="col-sm-4 ">
+                                <input class="form-control" type="text" id="inputbaseAmount"
+                                       th:field="*{baseAmount}" readonly/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-sm-12" th:if="*{glHeader}!=null">
+                            <label class="col-sm-3 control-label " for="inputglHeader">Document Number</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-8 ">
+
+
+                                <input class="form-control" type="text" id="inputglHeaderDoc"
+                                       th:field="*{glHeader.documentNumber}" readonly/>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label " for="inputdesc">Note</label>
+
+                            <div class="col-sm-1 ">
+                                <b>:</b>
+                            </div>
+                            <div class="col-sm-8 ">
+
+
+                                <input class="form-control" type="text" id="inputdesc"
+                                       th:field="*{desc}"/>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group ">
+                            <!--<label for="inputid">Name</label>-->
+                            <input type="hidden" class="form-control" id="inputcolumn" placeholder="column"
+                                   th:field="*{column.createdBy}" name="column"/>
+                            <!--<input type="text" class="form-control" id="inputinvtrnsName" placeholder="Inv Trns Name" th:field="*{transactionName}" name="transactionName"/>-->
+                                <span class="help-block" th:if="${#fields.hasErrors('column.createdBy')}"
+                                      th:errors="*{column.createdBy}">User Name Error</span>
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="inputid">Name</label>-->
+                            <input type="hidden" class="form-control" id="inputcolumnDate" placeholder="columnDate"
+                                   th:field="*{column.creationDate}" name="columnDate"/>
+                            <!--<input type="text" class="form-control" id="inputinvtrnsName" placeholder="Inv Trns Name" th:field="*{transactionName}" name="transactionName"/>-->
+                                <span class="help-block" th:if="${#fields.hasErrors('column.creationDate')}"
+                                      th:errors="*{column.creationDate}">User Name Error</span>
+                        </div>
+
+                        <div>
+                            <button type="button" data-toggle="modal" data-target="#modal-RecordHistory" th:id="btnId"
+                                    th:attr="data-target='#modal-RecordHistory'" title="Record History">
+                                <span class="glyphicon glyphicon-record"></span>
+                            </button>
+                            <script th:inline="javascript">
+                                document.getElementById('btnId').onclick =
+                                        function () {
+                                            var obj = [[${arReceipts.column}]];
+
+                                            histabledataset(obj);
+                                        };
+
+                            </script>
+
+                        </div>
+
+
+                        <div class="form-group  col-sm-12 text-right Padding10px">
+                            <a th:href="@{'/ArReceipts/search/E/'+${pageId}+'/'+${temltId}}"
+                               class="btn btn-primary">Search</a>
+                            <span th:if="${arReceipts.arReceiptStatus==T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).N}">
+                                <button type="submit" name="save" class="btn btn-success"
+                                        onclick="return checkemptybankLine()">Save
+                                </button>
+                            </span>
+
+                            <span th:if="${arReceipts.arReceiptStatus==T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).P}">
+                                <button type="submit" name="undo" class="btn btn-danger">Undo</button>
+                            </span>
+
+
+
+
+                                <span th:if="${arReceipts.id!=null and arReceipts.arReceiptStatus==T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).N}">
+                                 <button type="submit" name="post" id="btpost" onclick="return prevDbClick(this.id)"
+                                         class="btn btn-primary">Post
+                                 </button>
+                                </span>
+
+                                <span>
+
+                                <a th:href="@{'/ArReceipts/arReceipt/E/'+${pageId}+'/'+${temltId}}"
+                                   class="btn btn-default">New</a>
+                                    <span th:if="${arReceipts.id!=null and arReceipts.arReceiptStatus==T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).N}">
+                                <a th:href="@{'/ArReceipts/arReceiptCharges/E/'+${pageId}+'/'+${temltId}+'/'+${arReceipts.id}}"
+                                   class="btn btn-default">Charges</a>
+                                </span>
+
+
+                        </div>
+
+
+                    </form>
+                    <div data-th-replace="fragments/recordHistoryModal :: recordhis-modal"></div>
+
+                </div>
+
+
+                <div class="panel-footer">
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="form-group col-sm-12  jepg_cust_head">
+                    <div class="form-group col-sm-5 " style="padding-left: 0; color: #172D44"><b>Charges</b></div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group col-sm-12">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <!--<th>Id</th>-->
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <!--<th>Desc</th>-->
+                            <div th:if="${arReceipts.arReceiptStatus==T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).N}">
+                                <th>Edit</th>
+                            </div>
+                            </thead>
+                            <tbody>
+                            <div>
+                                <tr th:each="c : ${ArReceiptChargeList}">
+                                    <!--<td th:text="${c.id}"></td>-->
+                                    <td th:text="${c.arChargeTypes.name}"></td>
+                                    <td th:text="${c.chargeAmount}"></td>
+                                    <!--<td th:text="${c.desc}"></td>-->
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="..." name="edit">
+                                            <span th:if="${arReceipts.arReceiptStatus==T(com.aye.web.model.ArCommonEnum.ArReceiptStatus).N}">
+                                            <a id="lineID"
+                                               th:href="@{/ArReceipts/arReceiptCharges/U/}+${pageId}+'/'+${temltId}+'/'+${arReceipts.id}+'/'+${c.id}"
+                                               class="btn btn-success"><span
+                                                    class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+
+                                                 <a th:href="@{/ArReceipts/arReceiptChargesDelete/E/}+${pageId}+'/'+${temltId}+'/'+${arReceipts.id}+'/'+${c.id}"
+                                                    class="btn btn-danger"><span
+                                                         class="glyphicon glyphicon-remove"
+                                                         aria-hidden="true"></span></a>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+
+</body>
+</html>

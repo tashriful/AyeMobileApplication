@@ -1,0 +1,12 @@
+version: "3"
+services:
+   aye-userservice-server:
+     container_name: aye-userservice
+     environment:
+       TZ: Asia/Dhaka
+     build:
+#       context: aye-userservice
+       dockerfile: Dockerfile
+     image: aye-userservice-0.0.1:latest
+     ports:
+     - 8082:8082

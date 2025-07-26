@@ -1,0 +1,84 @@
+#version: "3"
+#services:
+#  service-registry:
+#    build:
+#      context: aye-mobile-service
+#      dockerfile: Dockerfile-service-registry
+#    container_name: service-registry
+#    image: service-registry-0.0.1:latest
+#    environment:
+#      - spring.application.name=service-registry
+#      - eureka.client.register-with-eureka=false
+#      - eureka.client.fetch-registry=false
+#      - "TZ: Asia/Dhaka"
+#    ports:
+#      - 8760:8760
+#    networks:
+#      - eureka-network
+#
+#  API-GATEWAY:
+#    build:
+#      context: aye-mobile-service
+#      dockerfile: Dockerfile-api-gateway
+#    container_name: API-GATEWAY
+#    image: api-gateway-0.0.1:latest
+#    environment:
+#      - eureka.instance.preferIpAddress=true
+#      - eureka.client.service-url.defaultZone=http://service-registry:8760/eureka
+#      - "TZ: Asia/Dhaka"
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - eureka-network
+#    depends_on:
+#      - service-registry
+#
+#  AUTH-SERVICE:
+#    build:
+#      context: aye-mobile-service
+#      dockerfile: Dockerfile-auth-service
+#    container_name: AUTH-SERVICE
+#    image: aye-authservice-0.0.1:latest
+#    environment:
+#      - eureka.instance.preferIpAddress=true
+#      - eureka.client.service-url.defaultZone=http://service-registry:8760/eureka
+#      - "TZ: Asia/Dhaka"
+#    ports:
+#      - 8084:8084
+#    networks:
+#      - eureka-network
+#    depends_on:
+#      - service-registry
+#      - API-GATEWAY
+#
+#  USER-SERVICE:
+#    build:
+#      context: aye-mobile-service
+#      dockerfile: Dockerfile-user-service
+#    container_name: USER-SERVICE
+#    image: aye-userservice-0.0.1:latest
+#    environment:
+#      - eureka.instance.preferIpAddress=true
+#      - eureka.client.service-url.defaultZone=http://service-registry:8760/eureka
+#      - "TZ: Asia/Dhaka"
+#    ports:
+#      - 8082:8082
+#    networks:
+#      - eureka-network
+#    depends_on:
+#      - service-registry
+#      - API-GATEWAY
+#networks:
+#  eureka-network:
+#
+#    #  ayereceivable-server:
+#    #    container_name: aye-arkafka
+#    #    environment:
+#    #      TZ: Asia/Dhaka
+#    #    build:
+#    #      context: aye-service
+#    #      dockerfile: Dockerfile-Ar
+#    #    image: aye-arkafka:latest
+#    #    depends_on:
+#    #      - broker
+#

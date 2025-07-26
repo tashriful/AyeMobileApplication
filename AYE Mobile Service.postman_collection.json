@@ -1,0 +1,2933 @@
+{
+	"info": {
+		"_postman_id": "d2803693-ef4a-43c6-a34b-30421271de55",
+		"name": "AYE Mobile Service",
+		"description": "Backend Api's for Mobile Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19505395",
+		"_collection_link": "https://mobile-app-aye.postman.co/workspace/fad88eb0-98c6-409a-8617-05e4cc29efc1/collection/19505395-d2803693-ef4a-43c6-a34b-30421271de55?action=share&source=collection_link&creator=19505395"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Save New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Kamal Khan\",\r\n    \"username\" : \"kamal\",\r\n    \"password\" : \"1234\",\r\n    \"designation\" : \"Officer\",\r\n    \"startDate\" : \"2023-01-01\",\r\n    \"isActive\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/msales/api/user/saveUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"msales",
+								"api",
+								"user",
+								"saveUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update New User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"656330bb8603727f48b1c76d\",\r\n    \"name\" : \"Kamran Khan\",\r\n    \"username\" : \"kamran\",\r\n    \"password\" : \"kamran1\",\r\n    \"designation\" : \"Officer\",\r\n    \"startDate\" : \"2023-01-01\",\r\n    \"isActive\" : \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/user/updateUser/6563303f0229477e3de14377",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"updateUser",
+								"6563303f0229477e3de14377"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAllUser",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAllUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/msales/api/user/getAllUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"msales",
+								"api",
+								"user",
+								"getAllUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getUserById/656ec9c584540810aadc4c22",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getUserById",
+								"656ec9c584540810aadc4c22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/msales/api/auth/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoiUmVmcmVzaCBUb2tlbiIsInN1YiI6ImthbWFsIiwiaWF0IjoxNzA3MjkzNzc1LCJleHAiOjE3MDcyOTQwNzV9.cLsk24SFjH7TCLy4bz8oIxu17MUIlkwGWb_R3cPznss",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"msales",
+								"api",
+								"auth",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoiUmVmcmVzaCBUb2tlbiIsInN1YiI6ImthbWFsIiwiaWF0IjoxNzA3MjkzNzc1LCJleHAiOjE3MDcyOTQwNzV9.cLsk24SFjH7TCLy4bz8oIxu17MUIlkwGWb_R3cPznss"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"hafiz\",\r\n    \"password\" : \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/authenticate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/msales/api/user/getUserByUserName/kamal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"msales",
+								"api",
+								"user",
+								"getUserByUserName",
+								"kamal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\" : \"eyJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoiUmVmcmVzaCBUb2tlbiIsInN1YiI6ImthbWFsIiwiaWF0IjoxNzA3MzAzNzk5LCJleHAiOjE3MDczMDQwOTl9.5mqXTzLqZ36tE_2oB0KU28CDhzeaByI4HLT5KuOnVW8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/msales/api/auth/refreshToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"msales",
+								"api",
+								"auth",
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Access Template",
+			"item": [
+				{
+					"name": "Save Access Template",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYW1hbCIsImlhdCI6MTcwODU4NDYxMCwiZXhwIjoxNzA4NTg1MjEwfQ.AluuSB_mxlO5L6aQSubMAo1EeU-v-ANwRsdJi3m4wo8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tempDescription\" : \"Template For Admin\",\r\n    \"tempNumber\" : \"Template For Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/saveAccessTemplate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"saveAccessTemplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Access Template",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"656468fda7e61a1a12d4421c\",\r\n    \"tempDescription\" : \"temp1\",\r\n    \"tempNumber\" : \"temp1 description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/accessTemplate/updateAccessTemplate/656468fda7e61a1a12d4421c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"accessTemplate",
+								"updateAccessTemplate",
+								"656468fda7e61a1a12d4421c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Access Template",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAllAccessTemplate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAllAccessTemplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccess Template By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/accessTemplate/getAccessTemplateById/6570189884540810aadc4c25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"accessTemplate",
+								"getAccessTemplateById",
+								"6570189884540810aadc4c25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Access Template Details",
+			"item": [
+				{
+					"name": "Save Access Template Details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tmplDetailName\": \"Order Managment\",\r\n    \"orgHierarchyM\": {\r\n        \"id\": \"6550ae37fb7401a59a99c751\"\r\n    },\r\n    \"userMenuM\" : {\r\n        \"id\" : \"6570190d84540810aadc4c26\"\r\n    },\r\n    \"userAccessTemplateM\": {\r\n        \"id\" : \"6570189884540810aadc4c25\"\r\n    },\r\n    \"startDate\": \"2023-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/accessTemplate/saveAccessTemplateDetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"accessTemplate",
+								"saveAccessTemplateDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Access Template Details",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"656484fd7dac8f1566e7d822\",\r\n    \"tmplDetailName\": \"temp1 Details\",\r\n    \"orgHierarchyM\": {\r\n        \"id\": \"6550ae37fb7401a59a99c751\"\r\n    },\r\n    \"userAccessTemplateM\": {\r\n        \"id\": \"656468fda7e61a1a12d4421c\"\r\n    },\r\n    \"startDate\": \"2023-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/accessTemplate/updateAccessTemplateDetails/656484fd7dac8f1566e7d822",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"accessTemplate",
+								"updateAccessTemplateDetails",
+								"656484fd7dac8f1566e7d822"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Access Template Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAllAccessTemplateDetails",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAllAccessTemplateDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccess Template Details By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYW1hbCIsImlhdCI6MTcwODU4OTM3OSwiZXhwIjoxNzA4NTg5OTc5fQ.7KdzFyOh5f6kvY1SQLqd00bqTbAsI2vtvBYMXar-1BE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAccessTemplateDetailsById/65701a3484540810aadc4c2a",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAccessTemplateDetailsById",
+								"65701a3484540810aadc4c2a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccess Template Details By Template",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getTmpltDetailsByTmplt/accessTemplate/6570189884540810aadc4c25",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getTmpltDetailsByTmplt",
+								"accessTemplate",
+								"6570189884540810aadc4c25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Access",
+			"item": [
+				{
+					"name": "save userAccess",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessNumber\": \"yyyyyg\",\r\n    \"user\": {\r\n        \"id\": \"656ec9c584540810aadc4c22\"\r\n    },\r\n    \"userAccessTemplateM\": {\r\n        \"id\": \"6570189884540810aadc4c25\"\r\n    },\r\n    \"userAccessType\": \"Android\",\r\n    \"startDate\": \"2023-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/userAccess/saveUserAccess",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"userAccess",
+								"saveUserAccess"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update userAccess",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"65648bf03fd9d77ab3e19046\",\r\n    \"accessNumber\" : \"a\",\r\n    \"user\" : {\r\n        \"id\" : \"65632ff10229477e3de14376\"\r\n    },\r\n    \"userAccessTemplateM\": {\r\n        \"id\": \"656468fda7e61a1a12d4421c\"\r\n    },\r\n    \"userAccessType\" : \"Android\",\r\n    \"startDate\" : \"2023-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/userAccess/updateUserAccess/65648bf03fd9d77ab3e19046",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"userAccess",
+								"updateUserAccess",
+								"65648bf03fd9d77ab3e19046"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User Access",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAllUserAccess",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAllUserAccess"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Access By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getUserAccessById/65e9b637e722633f3f0b6b03",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getUserAccessById",
+								"65e9b637e722633f3f0b6b03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Access By User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getUserAccess/user/656ec9c584540810aadc4c22",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getUserAccess",
+								"user",
+								"656ec9c584540810aadc4c22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Menu",
+			"item": [
+				{
+					"name": "Save Menu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"menuName\": \"Order\",\r\n    \"menuLevel\": \"TRNS\",\r\n    \"isMenuActive\": true,\r\n    \"module\": \"ORD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/userMenu/saveMenu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"userMenu",
+								"saveMenu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Menu",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"6565d6b54be8174749c9f9e3\",\r\n    \"menuName\": \"menu 1\",\r\n    \"menuLevel\": \"TRNS\",\r\n    \"isMenuActive\": true,\r\n    \"module\": \"ORD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/userMenu/updateMenu/6565d6b54be8174749c9f9e3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"userMenu",
+								"updateMenu",
+								"6565d6b54be8174749c9f9e3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAllMenu",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAllMenu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Menu By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/userMenu/getMenuById/6570190d84540810aadc4c26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"userMenu",
+								"getMenuById",
+								"6570190d84540810aadc4c26"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Menu Details",
+			"item": [
+				{
+					"name": "Save User Menu Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"menuName\": \"Delivery Schedule\",\r\n    \"page\": \"O2C_SCHD_ENTRY\",\r\n    \"pageId\": \"ac\",\r\n    \"isActive\": true,\r\n    \"userMenuM\" : {\r\n        \"id\" : \"6570190d84540810aadc4c26\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/saveMenuDetails",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"saveMenuDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All M Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAllMenuDetails",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAllMenuDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Menu Details By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getMenuDetailsById/65df09efbd9c7468c93d501c",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getMenuDetailsById",
+								"65df09efbd9c7468c93d501c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Menu Details By User Menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/getMenuDetailsByUserMenu/65e7fbaa0b687f5cb9ed8bd1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getMenuDetailsByUserMenu",
+								"65e7fbaa0b687f5cb9ed8bd1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Org Access",
+			"item": [
+				{
+					"name": "Save User Org Access",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orgHierarchyM\" : {\r\n        \"id\" : \"656dbd3d98c52f169ba9eb9d\"\r\n    },\r\n    \"userAccessTemplateDetails\" : {\r\n        \"id\" : \"656db4dfaab7f1463a4e560a\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/userOrgAccess/saveUserOrgAccess",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"userOrgAccess",
+								"saveUserOrgAccess"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User Access",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/msales/api/user/getAllUserOrgAccess",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"msales",
+								"api",
+								"user",
+								"getAllUserOrgAccess"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Inv Org Access",
+			"item": [
+				{
+					"name": "Save User Inv Org Access",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inventoryInformationsM\" : {\r\n        \"id\" : \"65706b8c12f0da25c16cae6c\"\r\n    },\r\n    \"userAccessTemplateDetails\" : {\r\n        \"id\" : \"65e7fb8b0b687f5cb9ed8bd0\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/saveUserInvOrgAccess",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"saveUserInvOrgAccess"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Inv Org Access",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/msales/api/user/getAllUserInvOrgAccess",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"msales",
+								"api",
+								"user",
+								"getAllUserInvOrgAccess"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Header",
+			"item": [
+				{
+					"name": "Save Order Header",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"orderDate\": \"2025-07-21\",  // Example date and time\r\n  \"orderTrnsType\" : {\r\n      \"id\" : \"65f56a899fe526a2f2221d30\"\r\n  },\r\n  \"orgHierarchy\": {\r\n      \"id\" : \"65706a5912f0da25c16cae69\"\r\n  },\r\n  \"customerLine\" : {\r\n      \"id\" : \"657573bd98c52f169baa39db\"\r\n  },\r\n  \"inventoryInformations\": {\r\n      \"id\" : \"65e563346c6f5e418d1bf2cd\"\r\n  },\r\n  \"orderStatus\": \"N\",\r\n  \"notes\": \"Additional notes or comments here\",\r\n  \"createdBy\" : {\r\n      \"id\" : \"656ec9c584540810aadc4c22\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/main/ord/orderHeaders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"ord",
+								"orderHeaders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Order By Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/main/ord/getOrderHeaders/status/P",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"ord",
+								"getOrderHeaders",
+								"status",
+								"P"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Order By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/main/ord/orderHeaders/687dc406b764893e4f8a4944",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"ord",
+								"orderHeaders",
+								"687dc406b764893e4f8a4944"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Status Change",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/main/ord/orderHeaders/687dc3e1b764893e4f8a4941/status/P",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"ord",
+								"orderHeaders",
+								"687dc3e1b764893e4f8a4941",
+								"status",
+								"P"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Header Search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"id\": \"6581670c9afd7d64dc145e70\",\r\n    \"orderNumber\" : \"000000008\",\r\n    // \"orderDate\" : \"2023-11-19\"\r\n    // \"orderTrnsType\" : \"6551b6cbfb7401a59a99c771\",\r\n    \"orgHierarchy\": \"65706a5912f0da25c16cae69\",             // need to give must\r\n    \"inventoryInformations\": \"65e563346c6f5e418d1bf2cd\"     //need to give must\r\n    // // \"customerLine\" : \"6553058afb7401a59a99c786\",\r\n    // \"orderStatus\": \"P\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/main/ord/searchOrderHeader",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"ord",
+								"searchOrderHeader"
+							],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "687dc406b764893e4f8a4944",
+									"disabled": true
+								},
+								{
+									"key": "orderTrnsType",
+									"value": "6551b6cbfb7401a59a99c771",
+									"disabled": true
+								},
+								{
+									"key": "orderStatus",
+									"value": "P",
+									"disabled": true
+								},
+								{
+									"key": "orgHierarchy",
+									"value": "65706a5912f0da25c16cae69",
+									"disabled": true
+								},
+								{
+									"key": "customerLine",
+									"value": "6553058afb7401a59a99c786",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "orderNumber",
+									"value": "000000008",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order Header",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/deleteOrderHeader/65fa76a8c7652a6a87a7eecb",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"deleteOrderHeader",
+								"65fa76a8c7652a6a87a7eecb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Line",
+			"item": [
+				{
+					"name": "Save Order Line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderHeader\": {\r\n        \"id\":\"687dca61b764893e4f8a494a\"\r\n    },\r\n    \"ordItemDetailM\": {\r\n        \"id\": \"655c9bd9fb7401a59a9a06db\"\r\n    },\r\n    \"orderUomCode\": \"EA\",\r\n    \"orderUomQty\" : 2,\r\n    \"price\" : 500,\r\n    \"orderDefaultUomQty\" : 2,\r\n    \"itemCode\": \"NF.MDFB.12MM\",\r\n    \"lineNotes\": \"Notes\",\r\n    \"createdBy\": {\r\n        \"id\": \"656ec9c584540810aadc4c22\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/main/ord/orderLines",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"ord",
+								"orderLines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update order line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lineId\": \"65faaa1b406a38089255a97d\",\r\n    \"orderHeader\": {\r\n        \"id\": \"65faa971406a38089255a97c\"\r\n    },\r\n    \"orderUomCode\": \"EA\",\r\n    \"itemCode\": \"FG.MDFB.12MMB\",\r\n    \"orderUomQty\": 4,\r\n    \"orderDefaultUomQty\": 4,\r\n    \"convRate\": 5,\r\n    \"price\": 100,\r\n    \"lineNotes\": \"Notes\",\r\n    \"ordItemDetailM\": {\r\n        \"id\": \"655c9bd9fb7401a59a9a06da\"\r\n    },\r\n    \"createdBy\": {\r\n        \"id\": \"656ec9c584540810aadc4c22\"\r\n    },\r\n    \"updatedBy\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ord/saveOrderLine",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"saveOrderLine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Order Line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/main/ord/orderLines",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"ord",
+								"orderLines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Order Line By Order Header",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order/getOrderLinesByOrderHeader/6551b77b59281b3e5b01332b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"getOrderLinesByOrderHeader",
+								"6551b77b59281b3e5b01332b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Order Line By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/getOrderLine/6551f55602529c0267fd1e30",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"getOrderLine",
+								"6551f55602529c0267fd1e30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order Line",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/deleteOrderLine/65fab0017dc91e66eab64f38/65fab01c7dc91e66eab64f3a",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"deleteOrderLine",
+								"65fab0017dc91e66eab64f38",
+								"65fab01c7dc91e66eab64f3a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schd Header",
+			"item": [
+				{
+					"name": "Get All Schd Header",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dlv/getAllSchdHeader",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dlv",
+								"getAllSchdHeader"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Schd Header By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dlv/getSchdHeaderById/687df57f6d02507007c2a237",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dlv",
+								"getSchdHeaderById",
+								"687df57f6d02507007c2a237"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Schd Header",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\": \"2025-11-09\",\r\n    \"endDate\": \"2026-11-09\",\r\n    \"status\": \"N\",\r\n    \"orgHierarchy\": {\r\n        \"id\": \"65706a5912f0da25c16cae69\"\r\n    },\r\n    \"orderTrnsType\": {\r\n        \"id\": \"6577eaba98c52f169baa3af5\"\r\n    },\r\n    \"inventoryInformations\": {\r\n        \"id\": \"65e563346c6f5e418d1bf2cd\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/dlv/saveSchdHeader",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dlv",
+								"saveSchdHeader"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Schd Header",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"6555e4acf4c62813ee821a71\",\r\n    \"scheduleNumber\": \"0000002\",\r\n    \"startDate\": \"2023-11-09T10:30:00\",\r\n    \"endDate\": \"2023-11-09T10:30:00\",\r\n    \"status\": \"N\",\r\n    \"orgHierarchy\": {\r\n        \"id\": \"6550ae37fb7401a59a99c751\"\r\n    },\r\n    \"orderTrnsType\": {\r\n        \"id\": \"6551b6cbfb7401a59a99c771\"\r\n    },\r\n    \"inventoryInformations\": {\r\n        \"id\": \"65519d9afb7401a59a99c759\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/dlv/updateSchdHeader/6555e4acf4c62813ee821a71",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dlv",
+								"updateSchdHeader",
+								"6555e4acf4c62813ee821a71"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schd Line",
+			"item": [
+				{
+					"name": "Get All Schd Line",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/OrdDelvSchd/getAllSchdLine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"OrdDelvSchd",
+								"getAllSchdLine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Schd Line By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/OrdDelvSchd/getSchdLineById/6582e0ef84b9386f82d22135",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"OrdDelvSchd",
+								"getSchdLineById",
+								"6582e0ef84b9386f82d22135"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Schd Line",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ordDelvScheduleHeader\": {\r\n        \"id\": \"6582df2784b9386f82d22133\"\r\n    },\r\n    \"orderTrnsType\": {\r\n        \"id\": \"6577eaba98c52f169baa3af5\"\r\n    },\r\n    \"orderLine\": {\r\n        \"lineId\": \"658168d59afd7d64dc145e8f\"\r\n    },\r\n    \"orderHeader\": {\r\n        \"id\": \"6581670c9afd7d64dc145e70\"\r\n    },\r\n    \"customerLine\": {\r\n        \"id\": \"657573bd98c52f169baa39db\"\r\n    },\r\n    \"masterItem\": {\r\n        \"id\": \"65753b4098c52f169baa16d3\"\r\n    },\r\n    \"orderUomCode\": \"EA\",\r\n    \"itemCode\": \"FG.MDFB.18MMB\",\r\n    \"scheduleQty\": 2,\r\n    \"approveQty\": 2,\r\n    \"approveDefaultUomQty\": 12.44,\r\n    \"convRate\": 12.98,\r\n    \"unitSellingPrice\": 122.344,\r\n    \"lineStartDate\": \"2023-11-09\",\r\n    \"lineEndDate\": \"2023-11-09\",\r\n    \"scdLineStatus\": \"N\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/msales/api/ordDelvSchd/saveSchdLine/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"msales",
+								"api",
+								"ordDelvSchd",
+								"saveSchdLine",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Schd Line",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"65560448601860247e2ab0a7\",\r\n    \"ordDelvScheduleHeader\": {\r\n        \"id\": \"6555c9f9b994b12023e7cef7\"\r\n    },\r\n    \"orderTrnsType\": {\r\n        \"id\": \"6551b6cbfb7401a59a99c771\"\r\n    },\r\n    \"orderLine\": {\r\n        \"lineId\": \"655206f3d53bf70a4b8875aa\"\r\n    },\r\n    \"orderHeader\": {\r\n        \"id\": \"6551b77b59281b3e5b01332b\"\r\n    },\r\n    \"orderUomCode\": \"EA\",\r\n    \"itemCode\": \"FG.MDFB.16MMB\",\r\n    \"scheduleQty\": 1000,\r\n    \"approveQty\" : 133.4,\r\n    \"approveDefaultUomQty\" : 12.44,\r\n    \"convRate\": 12.98,\r\n    \"unitSellingPrice\" : 122.344,\r\n    \"lineStartDate\": \"2023-11-09T10:30:00\",\r\n    \"lineEndDate\": \"2023-11-09T10:30:00\",\r\n    \"scdLineStatus\": \"N\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/OrdDelvSchd/updateSchdLine/65560448601860247e2ab0a7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"OrdDelvSchd",
+								"updateSchdLine",
+								"65560448601860247e2ab0a7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Save Payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Tashrif/Downloads/pexels-dn-milk-935484.jpg"
+								},
+								{
+									"key": "payType",
+									"value": "CASH",
+									"type": "text"
+								},
+								{
+									"key": "number",
+									"value": "000000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "customerLineM.id",
+									"value": "657573bd98c52f169baa39db",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-11-2",
+									"type": "text"
+								},
+								{
+									"key": "trnsDate",
+									"value": "2023-11-02",
+									"type": "text"
+								},
+								{
+									"key": "bankCode",
+									"value": "MTB",
+									"type": "text"
+								},
+								{
+									"key": "refNumber",
+									"value": "ESXCAAGGG44G",
+									"type": "text"
+								},
+								{
+									"key": "bankLine.id",
+									"value": "65758e3a98c52f169baa3ade",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "3332236",
+									"type": "text"
+								},
+								{
+									"key": "orgHierarchyM",
+									"value": "65706a5912f0da25c16cae69",
+									"type": "text"
+								},
+								{
+									"key": "paymentStatus",
+									"value": "N",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ord/savePayments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"savePayments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payments",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6553283ea183902e87901721\",\r\n    \"payType\" : \"Bank Pay\",\r\n    \"number\" : \"0000000\",\r\n    \"customerLineM\" : {\r\n        \"id\" : \"6553058afb7401a59a99c786\"\r\n    },\r\n    \"date\" : \"2023-11-09T10:30:00\",\r\n    \"trnsDate\" : \"2023-11-09T10:30:00\",\r\n    \"bankCode\" : \"MTB\",\r\n    \"refNumber\" : \"ESXCAAGGG44G\",\r\n    \"bankLine\" : {\r\n        \"id\" : \"655316a3fb7401a59a99c788\"\r\n    },\r\n    \"amount\" : 555555.99,\r\n    \"parentAppPaymentsId\" : 64\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/payments/updatePayments/6553283ea183902e87901721",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"updatePayments",
+								"6553283ea183902e87901721"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/getAllPayments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"getAllPayments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payments By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/payments/getPaymentsById/6582c4dfb74c460745d793fb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"getPaymentsById",
+								"6582c4dfb74c460745d793fb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payments By Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/getPayment/status/P",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"getPayment",
+								"status",
+								"P"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Attachment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/payments/downloadAttachment/658029af22ade3522a55cc86",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"downloadAttachment",
+								"658029af22ade3522a55cc86"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Attachment Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/payments/downloadAttachment/658029af22ade3522a55cc86",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"downloadAttachment",
+								"658029af22ade3522a55cc86"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Payment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"id\": \"6607a9dc5973a70754ebe737\",\r\n//    \"number\": \"000000002\",\r\n    // \"date\" : \"2024-03-29\",\r\n    \"payType\": \"CASH\",\r\n    \"paymentStatus\" : \"P\",\r\n    \"orgHierarchyM\": \"65706a5912f0da25c16cae69\",\r\n    \"customerLineM\" : \"657573bd98c52f169baa39db\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ord/searchPayment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"searchPayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord//paymentPost/6607a9dc5973a70754ebe737",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"",
+								"paymentPost",
+								"6607a9dc5973a70754ebe737"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Distribution",
+			"item": [
+				{
+					"name": "Save Distribution",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"receipt\": {\r\n        \"id\" : \"658167259afd7d64dc145e8\"\r\n    },\r\n    \"reciptAmount\": 19873.44,\r\n    \"date\": \"2023-11-09T10:30:00\",\r\n    \"trnsDate\": \"2023-11-09T10:30:00\",\r\n    \"chqNumber\": \"ARE048446479\",\r\n    \"chqAmount\": 5757383.44,\r\n    \"orderHeaderM\": {\r\n        \"id\" : \"6581670c9afd7d64dc145e70\"\r\n    },\r\n    \"orderAmount\": 3332236.99,\r\n    \"distributedAmount\": 3332236.99\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/distribution/saveDistribution?module=ORD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"distribution",
+								"saveDistribution"
+							],
+							"query": [
+								{
+									"key": "module",
+									"value": "ORD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Distribution",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6553283ea183902e87901721\",\r\n    \"receiptNumber\": \"u6ffyr789\",\r\n    \"reciptAmount\": 500.00,\r\n    \"date\": \"2023-11-09T10:30:00\",\r\n    \"trnsDate\": \"2023-11-09T10:30:00\",\r\n    \"chqNumber\": \"ARE048446479\",\r\n    \"chqAmount\": 5757383.44,\r\n    \"orderNumber\": \"000087\",\r\n    \"distributedAmount\": 3332236.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/distribution/updateDistribution/6553283ea183902e87901721",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"distribution",
+								"updateDistribution",
+								"6553283ea183902e87901721"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Distribution",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/distribution/getAllDistribution",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"distribution",
+								"getAllDistribution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Distribution By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/distribution/getDistributionById/65818ed943dfc42ba4e22b3c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"distribution",
+								"getDistributionById",
+								"65818ed943dfc42ba4e22b3c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrgHierarchy",
+			"item": [
+				{
+					"name": "save Org",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"OU\",\r\n    \"name\": \"Green Board & Fibre Mills Ltd.\",\r\n    \"code\": \"GBF_OU\",\r\n    \"address\": \"5Th Floor, T.K.Bhaban Dhaka-1215\",\r\n    \"parentAppOrgHierachyMId\": 64,\r\n    \"createdBy\": {\r\n        \"id\": \"656ec9c584540810aadc4c22\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ord/saveOrgHierarchy",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"saveOrgHierarchy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All ORg",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/main/orgHierarchy",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"main",
+								"orgHierarchy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Org By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/getOrgHierarchyById/6570689212f0da25c16cae67",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"getOrgHierarchyById",
+								"6570689212f0da25c16cae67"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InventoryInformations",
+			"item": [
+				{
+					"name": "Save inv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"GBF_IO3\",\r\n    \"name\": \"Green Board and Fibre Mills Ltd(Munshigonj)\",\r\n    \"address\": \"GAZARIA,MUNSHIGONJ\",\r\n    \"orgHierarchy\": {\r\n        \"id\": \"65706a5912f0da25c16cae69\"\r\n    },\r\n    \"itemOrg\" : {\r\n        \"id\" : \"65706a9d12f0da25c16cae6a\"\r\n    },\r\n    \"parentAppInvInfoMId\" : 72,\r\n    \"createdBy\": {\r\n        \"id\": \"656ec9c584540810aadc4c22\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inventoryInformations/saveInventory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventoryInformations",
+								"saveInventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Inv",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/getAllInventory",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"getAllInventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Inv By Org",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/getInventoriesByOrg/65706a5912f0da25c16cae69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"getInventoriesByOrg",
+								"65706a5912f0da25c16cae69"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Inv By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inventoryInformations/getInventoryById/65706b8c12f0da25c16cae6c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventoryInformations",
+								"getInventoryById",
+								"65706b8c12f0da25c16cae6c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "find by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/findCustomerById/657573bd98c52f169baa39db",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"findCustomerById",
+								"657573bd98c52f169baa39db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Customer Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"fat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ord/searchCustomer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"searchCustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Customer Name and id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"fat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customerLine/searchCustomer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customerLine",
+								"searchCustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search Customer name Starts With",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"FAT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ord/searchCustomerStartsWith",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"searchCustomerStartsWith"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search Customer name with Regex",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Khan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customerLine/searchCustomerRegex",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customerLine",
+								"searchCustomerRegex"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find by org and id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/customerLine/findByOrgAndId/65706a5912f0da25c16cae69/657573bd98c52f169baa39db",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customerLine",
+								"findByOrgAndId",
+								"65706a5912f0da25c16cae69",
+								"657573bd98c52f169baa39db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All by org",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/findCustomerByOrg/65706a5912f0da25c16cae69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"findCustomerByOrg",
+								"65706a5912f0da25c16cae69"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bank",
+			"item": [
+				{
+					"name": "Find By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bankLine/findById/65758e3a98c52f169baa3adb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bankLine",
+								"findById",
+								"65758e3a98c52f169baa3adb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Org id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/findBankByOrg/65706a5912f0da25c16cae69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"findBankByOrg",
+								"65706a5912f0da25c16cae69"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By ORg and ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/findBankByOrgAndId/65706a5912f0da25c16cae69/65758e3a98c52f169baa3ae0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"findBankByOrgAndId",
+								"65706a5912f0da25c16cae69",
+								"65758e3a98c52f169baa3ae0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item Master",
+			"item": [
+				{
+					"name": "Find By id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/masterItem/findById/65753b4098c52f169baa131c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"masterItem",
+								"findById",
+								"65753b4098c52f169baa131c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search item code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/masterItem/findById/65753b4098c52f169baa131c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"masterItem",
+								"findById",
+								"65753b4098c52f169baa131c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Inv ORg",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/masterItem/findByInvOrgId/657533ef12f0da25c16cae6d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"masterItem",
+								"findByInvOrgId",
+								"657533ef12f0da25c16cae6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By inv Org and Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/masterItem/findByInvOrgIdAndId/65706b8c12f0da25c16cae6c/65753b4098c52f169baa131c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"masterItem",
+								"findByInvOrgIdAndId",
+								"65706b8c12f0da25c16cae6c",
+								"65753b4098c52f169baa131c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Trns Type",
+			"item": [
+				{
+					"name": "Get Transcation type by org and inv org",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/getTransactionByOrgAndInvOrg/65706a5912f0da25c16cae69/65e563346c6f5e418d1bf2cd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"getTransactionByOrgAndInvOrg",
+								"65706a5912f0da25c16cae69",
+								"65e563346c6f5e418d1bf2cd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item Details",
+			"item": [
+				{
+					"name": "Find items by parent org and inv org",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ord/findItemByOrgAndInvOrg/64/68",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ord",
+								"findItemByOrgAndInvOrg",
+								"64",
+								"68"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"azmal\",\r\n    \"userAccess\": [\r\n        {\r\n            \"userMenu\": \"menu1\",\r\n            \"menuDetails\": [\r\n                {\r\n                    \"menuName\": \"menud1\",\r\n                    \"page\": \"A\",\r\n                    \"isActive\": true\r\n                },\r\n                {\r\n                    \"menuName\": \"menud2\",\r\n                    \"page\": \"A\",\r\n                    \"isActive\": true\r\n                },\r\n                {\r\n                    \"menuName\": \"menud3\",\r\n                    \"page\": \"A\",\r\n                    \"isActive\": true\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"userMenu\": \"menu2\",\r\n            \"menuDetails\": [\r\n                {\r\n                    \"menuName\": \"menu2d1\",\r\n                    \"page\": \"A\",\r\n                    \"isActive\": true\r\n                },\r\n                {\r\n                    \"menuName\": \"menu2d2\",\r\n                    \"page\": \"A\",\r\n                    \"isActive\": true\r\n                },\r\n                {\r\n                    \"menuName\": \"menud3\",\r\n                    \"page\": \"A\",\r\n                    \"isActive\": true\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/msales/api/auth/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"msales",
+						"api",
+						"auth",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"strictSSL": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8091/micro1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"micro1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/yo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"yo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

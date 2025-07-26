@@ -1,0 +1,40 @@
+spring:
+  data:
+    mongodb:
+      database: mobileAppBackendDb
+      host: localhost
+      port: 27017
+  main:
+    allow-bean-definition-overriding: 'true'
+  mvc:
+    log-request-details: true
+  servlet:
+    multipart:
+      enabled: 'true'
+      max-request-size: 16MB
+      max-file-size: 16MB
+  application:
+    name: MAIN-ORDER-SERVICE
+
+
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: DEBUG
+server:
+  port: 8081
+  servlet:
+    context-path: /msales/api/main
+
+eureka:
+  instance:
+#    hostname: localhost
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://172.20.1.225:8760/eureka
+

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/layout">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--<html lang="en"-->
+<!--data-layout-decorate="~{fragments/layout}">-->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+
+
+    <!--<script th:inline="javascript">-->
+    <!--$(document).ready(function(){-->
+    <!--this._target.storageAgent().clearDataForOrigin(this._securityOrigin, storageTypes.join(','));-->
+    <!--})-->
+    <!--</script>-->
+
+    <title>User Menu Details</title>
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div style="margin: auto;width: 70%" class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User Menu Details</h3>
+                    <div th:if="${message != null}"
+                         style="width: 100%;margin:0 auto;"
+                         class="alert alert-info align-content-center" role="alert">
+                        <span style="color: red" th:if="${message != null}" th:text="${message}"></span>
+                    </div>
+                    <div th:if="${param.message != null}" class="alert align-content-center"
+                         style="width: 100%;margin:0 auto;">
+                        <p style="color: green;font-weight: bold" th:text="${param.message}"></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{'/menuDetailsPage/' + ${userMenuId}}" th:object="${userMenuDetailsDto}" method="post">
+                        <div class=" col-sm-12">
+
+                            <input type="hidden" th:if="*{id != null}" th:field="*{id}" class="form-control" id="id"
+                                   name="id" required>
+
+<!--                            <input type="text" th:if="${userMenu.id != null}" th:value="${userMenu}" class="form-control" id="userMenuM"-->
+<!--                                   name="userMenuM">-->
+
+                            <input type="hidden" th:field="*{userMenuM.id}"   id="inputUserMenuM">
+<!--                            <input type="text" th:field="*{userMenuM.menuName}"  class="form-control" id="inputUserMenuMN"-->
+<!--                                   name="userMenuM">-->
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="menuName">Menu Name :</label>
+                                    <input type="text" th:field="*{menuName}" class="form-control" id="menuName"
+                                           name="menuName" required>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group required">
+                                    <label for="pageID">UI Path :</label>
+                                    <input type="text" th:field="*{uiPath}" class="form-control"
+                                           id="pageID" name="pageID" required>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <div class="form-group required">
+                                    <label for="isActive">is Active :</label>
+                                    <select class="form-control" th:field="*{isActive}" name="isActive"
+                                            id="isActive">
+                                        <option value="">Select</option>
+                                        <option th:value="1">Yes</option>
+                                        <option th:value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 text-right">
+                                <a th:href="@{'/menuDetailsPage/'+${userMenuId}}" class="btn btn-primary">New</a>
+                                <button type="submit" value="submit" class="btn btn-success">Save</button>
+                            </div>
+                    </form>
+
+                    <div class="form-group col-sm-12" style="margin-top: 5%">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Menu Name</th>
+                                <th scope="col">UI Path</th>
+                                <th scope="col">Status</th>
+                                <!--                                <th scope="col">Action</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="u : ${userMenuDetailsDtos}">
+                                <td th:text="${u.menuName}"></td>
+                                <td th:text="${u.uiPath}"></td>
+                                <td th:text="${u.isActive}"></td>
+                                <td>
+                                    <a class="btn btn-success" th:href="@{'/menuDetailsPage/' + ${userMenuId} + '/' + ${u.id}}"><span
+                                            class="glyphicon glyphicon-edit"></span></a>
+                                    <!--                                    || <a class="btn btn-danger" th:href="@{'/user/delete/' + ${u.id}}"><span-->
+                                    <!--                                        class="glyphicon glyphicon-remove-circle"></span></a>-->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+version: "3"
+services:
+   aye-apigateway-server:
+     container_name: aye-apigateway
+     environment:
+       TZ: Asia/Dhaka
+     build:
+#       context: apigateway-service
+       dockerfile: Dockerfile
+     image: api-gateway-0.0.1:latest
+     ports:
+     - 8080:8080

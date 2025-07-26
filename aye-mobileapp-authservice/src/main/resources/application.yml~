@@ -1,0 +1,35 @@
+spring:
+  mvc:
+    log-request-details: true
+  application:
+    name: AUTH-SERVICE
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+server:
+  port: 8084
+  servlet:
+    context-path: /msales/api/
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://172.20.1.225:8760/eureka
+
+jwt:
+  accessToken:
+    validity:
+      seconds: 40
+  refreshToken:
+    validity:
+      seconds: 432000
+
+

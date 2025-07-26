@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"ff77a8edb6b4447f9ffbc75201546221","collectionName":"ORD_DELV_SCHEDULE_HEADER_M","type":"collection"}

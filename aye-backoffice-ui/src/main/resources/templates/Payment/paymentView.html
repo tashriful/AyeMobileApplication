@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/layout">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--<html lang="en"-->
+<!--data-layout-decorate="~{fragments/layout}">-->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+
+
+    <!--<script th:inline="javascript">-->
+    <!--$(document).ready(function(){-->
+    <!--this._target.storageAgent().clearDataForOrigin(this._securityOrigin, storageTypes.join(','));-->
+    <!--})-->
+    <!--</script>-->
+
+    <title>Payment</title>
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div style="margin: auto;width: 70%" class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Payments</h3>
+                    <div th:if="${message != null}"
+                         style="width: 100%;margin:0 auto;"
+                         class="alert alert-info align-content-center" role="alert">
+                        <span style="color: red" th:if="${message != null}" th:text="${message}"></span>
+                    </div>
+                    <div th:if="${param.message != null}" class="alert align-content-center"
+                         style="width: 100%;margin:0 auto;">
+                        <p style="color: green;font-weight: bold" th:text="${param.message}"></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+<!--                    <form th:action="@{'/userPage'}" th:object="${userDto}" method="post">-->
+<!--                        <div class=" col-sm-12">-->
+
+<!--                            <input type="hidden" th:if="${id != null}" th:field="*{id}" class="form-control" id="id"  name="id" required>-->
+
+
+<!--                            <div class="form-group">-->
+<!--                                <label for="name">Name :</label>-->
+<!--                                <input type="text" th:field="*{name}" class="form-control" id="name"  name="name" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-6">-->
+<!--                            <div class="form-group required">-->
+<!--                                <label for="username">Username :</label>-->
+<!--                                <input type="text"  th:field="*{username}" class="form-control" id="username" name="username" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-6">-->
+<!--                            <div class="form-group required">-->
+<!--                                <label for="password">Password :</label>-->
+<!--                                <input type="password" class="form-control" id="password" name="password" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-12">-->
+<!--                            <div class="form-group required">-->
+<!--                                <label for="designation">Designation :</label>-->
+<!--                                <input type="text"  th:field="*{designation}" class="form-control" id="designation" name="designation" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-6">-->
+<!--                            <div class="form-group required">-->
+<!--                                <label for="startDate">Start Date :</label>-->
+<!--                                <input type="date"  th:field="*{startDate}" class="form-control" id="startDate" name="startDate" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-6">-->
+<!--                            <div class="form-group required">-->
+<!--                                <label for="active">is Active :</label>-->
+<!--                                <select class="form-control" th:placeholder="*{active}" name="active" id="active">-->
+<!--                                    <option value="">Select</option>-->
+<!--                                    <option th:value="true">Yes</option>-->
+<!--                                    <option th:value="false">No</option>-->
+<!--                                </select>-->
+<!--&lt;!&ndash;                                    <input type="text" readonly th:field="*{active}" class="form-control" id="isActive" name="isActive" required>&ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-12 text-right">-->
+<!--                            <a th:href="@{/userPage}" class="btn btn-primary">New</a>-->
+<!--                            <button type="submit" value="submit" class="btn btn-success">Save</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+
+                    <div class="form-group col-sm-12" style="margin-top: 5%">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Number</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Bank</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Status</th>
+<!--                                <th scope="col">Action</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p : ${paymentDtos}">
+                                <td th:text="${p.number}"></td>
+                                <td th:text="${p.customerLineM.name}"></td>
+                                <td th:text="${p.payType}"></td>
+                                <td th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}"></td>
+                                <td th:text="${p.bankLine.name}"></td>
+                                <td th:text="${p.amount}"></td>
+                                <td th:text="${p.paymentStatus == p.paymentStatus.P ? 'Confirmed' : 'New'}"></td>
+                                <td>
+                                    <a class="btn btn-success" th:href="@{'/paymentDetails/' + ${p.id}}"><span
+                                            class="glyphicon glyphicon-edit"></span></a>
+<!--                                    <a class="btn btn-success" th:href="@{'/userAccessPage/' + ${o.id}}"><span-->
+<!--                                            class="glyphicon glyphicon-plus-sign"></span></a>-->
+<!--                                    || <a class="btn btn-danger" th:href="@{'/user/delete/' + ${u.id}}"><span-->
+<!--                                        class="glyphicon glyphicon-remove-circle"></span></a>-->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

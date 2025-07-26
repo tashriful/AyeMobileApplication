@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="arInvoiceLines" th:fragment="arInvoiceLines" class="arInvoiceLines">
+    <div class=" col-sm-12 table-responsive dist_view" th:if="!${#lists.isEmpty(arInvoiceHeader.arInvoiceLines)}">
+
+
+        <div>
+            <div class="col-sm-12 brder accgl-col">
+                <div class="col-sm-1 accgl-col brderright" style="width: 20px">SL</div>
+                <div class="col-sm-2 accgl-col brderright " align="center" style="width: 115px">Item</div>
+                <div class="col-sm-3 accgl-col brderright" align="center">Desc.</div>
+                <div class="col-sm-3 accgl-col brderright" align="center">Account</div>
+                <div class="col-sm-2 accgl-col brderright" align="center">Sub & Locator</div>
+                <div class="col-sm-1 accgl-col brderright" align="center">Quantity</div>
+                <div class="col-sm-1 accgl-col brderrigh" align="center" style="width: 30px">Action</div>
+            </div>
+
+            <div class="col-sm-12 accgl-col brder "
+                 th:each="lines,rowStat : *{arInvoiceLines}">
+                <div class="col-sm-1  form-group accgl-col high_control top_marg brderright"
+                     th:text="${rowStat.count}" style="width: 20px">1
+                </div>
+
+
+                <div class="col-sm-2 form-group accgl-col top_marg brderright" style="width: 115px">
+                    <input th:type="hidden"  th:field="*{arInvoiceLines[__${rowStat.index}__].id}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].arInvoiceHeader}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].masterItem.id.id}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].masterItem.id.inventoryInformations}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].deliveryLine}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].desc}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].priceListLine}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].unitListPrice}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].defaultUom}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].defaultUomCode}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].paymentTerms}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].termDueDate}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].amount}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].baseAmount}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].accCodeCombinitions}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].accCodeCombinitionsV}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].column.createdBy}" />
+                    <input th:type="hidden" th:field="*{arInvoiceLines[__${rowStat.index}__].column.creationDate}" />
+                    <input class="td form-control " th:type="text"
+                           th:field="*{arInvoiceLines[__${rowStat.index}__].itemCode}"
+                           height="2" readonly="readonly"/>
+
+                </div>
+
+
+                <div class="col-sm-3 form-group accgl-col top_marg brderright">
+                    <input class="td form-control texthide" th:type="text"
+                           th:field="*{arInvoiceLines[__${rowStat.index}__].desc}"
+                           height="2" />
+                </div>
+
+                <div class="col-sm-3 form-group accgl-col top_marg brderright">
+                    <input class="td form-control " th:type="text"
+                           th:field="*{arInvoiceLines[__${rowStat.index}__].accCodeCombinitionsV.concatedSegment}"
+                           height="2" />
+                </div>
+
+                <div class="col-sm-1 form-group accgl-col top_marg brderright">
+                    <input class="td form-control " th:type="text"
+                           th:field="*{arInvoiceLines[__${rowStat.index}__].unitSellingPrice}"
+                           height="2" />
+                </div>
+                <div class="col-sm-1 form-group accgl-col top_marg brderright">
+                    <input class="td form-control " th:type="text"
+                           th:field="*{arInvoiceLines[__${rowStat.index}__].defaultUomQty}"
+                           height="2"/>
+                </div>
+
+
+                <div class="col-sm-1 form-group accgl-col top_marg brderright">
+                    <input class="td form-control " th:type="text"
+                           th:field="*{arInvoiceLines[__${rowStat.index}__].amount}"
+                           height="2" />
+                </div>
+
+
+                <div class="col-sm-1 form-group accgl-col top_marg "  style="width: 30px">
+                    <div class="btn-group" role="group" aria-label="..." th:if="${arInvoiceHeader.arInvoiceStatus==T(com.aye.web.model.ArCommonEnum.ArInvoiceStatus).N}" >
+                        <!--<a th:href="@{/poReceive/rcvLine/U/}+${pageId}+'/'+${temltId}+'/'+${invOrgId}+'/'-->
+                                    <!--+*{poRcvLines[__${rowStat.index}__].poRcvHeader.id} +'/'-->
+                                    <!--+*{poRcvLines[__${rowStat.index}__].id}"-->
+                           <!--class="btn btn-success"><span-->
+                                <!--class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>-->
+
+                    </div>
+                    <span th:if="${arInvoiceHeader.arInvoiceStatus==T(com.aye.web.model.ArCommonEnum.ArInvoiceStatus).N}">
+                                        <!--<button type="button" data-toggle="modal" data-target="#modal-InvTrnsModal"-->
+                                                <!--th:id="btnIdInvTrns+*{poRcvLines[__${rowStat.index}__].id}"-->
+                                                <!--th:attr="data-target='#modal-InvTrnsModal'" title="Inventory Trnsactions">-->
+                                            <!--<span class="glyphicon glyphicon-info-sign"></span>-->
+                                            <!--<script>-->
+                                                <!--$('#btnIdInvTrns'+[[*{poRcvLines[__${rowStat.index}__].id}]]).on('click', function () {-->
+                                                    <!--$('#modal-InvTrnsModal').on('shown.bs.modal', function () {-->
+                                                        <!--getInvTrnsactionData([[*{poRcvLines[__${rowStat.index}__].id}]], [[${invOrgId}]], 'PORCV');-->
+                                                <!--});-->
+                                                <!--});-->
+                                            <!--</script>-->
+                                        <!--</button>-->
+                    </span>
+                </div>
+                <!--<div data-th-replace="Inventory/invTrnsModal :: InvTrnsModal-modal"></div>-->
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

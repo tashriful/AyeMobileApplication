@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/layout">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--<html lang="en"-->
+<!--data-layout-decorate="~{fragments/layout}">-->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+
+
+    <!--<script th:inline="javascript">-->
+    <!--$(document).ready(function(){-->
+    <!--this._target.storageAgent().clearDataForOrigin(this._securityOrigin, storageTypes.join(','));-->
+    <!--})-->
+    <!--</script>-->
+    <script th:src="@{/js/payment/viewAttachment.js}"></script>
+
+    <title>Payment</title>
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div style="margin: auto;width: 70%" class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Payment Details</h3>
+                    <div th:if="${message != null}"
+                         style="width: 100%;margin:0 auto;"
+                         class="alert alert-info align-content-center" role="alert">
+                        <span style="color: red" th:if="${message != null}" th:text="${message}"></span>
+                    </div>
+                    <div th:if="${param.message != null}" class="alert align-content-center"
+                         style="width: 100%;margin:0 auto;">
+                        <p style="color: green;font-weight: bold" th:text="${param.message}"></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{'/paymentPage'}" th:object="${paymentsMDto}" method="post">
+                        <div class=" col-sm-4">
+
+                            <input type="hidden" th:if="${id != null}" th:field="*{id}" class="form-control" id="id" required>
+
+
+                            <div class="form-group">
+                                <label for="paymentNumber">Payment Number :</label>
+                                <input type="text" readonly th:field="*{number}" class="form-control" id="paymentNumber" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label for="trnsDate">Trns. Date :</label>
+                                <input type="text" readonly  th:field="*{trnsDate}" class="form-control" id="trnsDate" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label for="date">Payment Date :</label>
+                                <input type="text" readonly  th:field="*{date}" class="form-control" id="date" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <div class="form-group required">
+                                <label for="customerLine">Customer :</label>
+                                <input type="text" readonly th:field="*{customerLineM.name}" class="form-control" id="customerLine" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <div class="form-group required">
+                                <label for="bankLine">Bank :</label>
+                                <input type="text" readonly th:field="*{bankLine.name}" class="form-control" id="bankLine" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="form-group required">
+                                <label for="bankCode">Bank Code :</label>
+                                <input type="text" readonly th:field="*{bankCode}" class="form-control" id="bankCode" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label for="refNumber">Reference No. :</label>
+                                <input type="text" readonly  th:field="*{refNumber}" class="form-control" id="refNumber" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label for="amount">Amount :</label>
+                                <input type="text" readonly th:field="*{amount}" class="form-control" id="amount" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label for="paymentStatus">Status :</label>
+                                <input type="text" readonly th:field="*{paymentStatus}" class="form-control" id="paymentStatus" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group required">
+                                <label for="paymentStatus">Attachments :</label>
+                                <ul class="list-group">
+                                    <li class="list-group-item" th:each="attachment : ${paymentsMDto.attachmentM}">
+                                        <span th:text="${attachment.fileName}"></span>
+                                        <span class="badge badge-primary" th:text="${attachment.size}"></span>
+                                        <button style="margin-left: 3%" type="button" id="inputImageId" class="btn btn-sm btn-primary">View Image</button>
+                                        <span hidden id="fileId" th:text="${attachment.id}"></span>
+                                        <span hidden id="fileName" th:text="${attachment.fileName}"></span>
+
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 text-right">
+<!--                            <a th:href="@{/paymentPage}" class="btn btn-primary">Back</a>-->
+<!--                            <a th:if="${paymentsMDto.paymentStatus != paymentsMDto.paymentStatus.A}" th:href="@{'/paymentApproved/' + ${paymentsMDto.id}}" class="btn btn-default">Approve</a>-->
+<!--                            <a th:if="${paymentsMDto.paymentStatus == paymentsMDto.paymentStatus.A}" class="btn btn-success">Approved</a>-->
+                        </div>
+
+                    </form>
+
+<!--                    <div class="form-group col-sm-12" style="margin-top: 5%">-->
+<!--                        <table class="table table-bordered table-hover table-striped">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th scope="col">#SI.</th>-->
+<!--                                <th scope="col">Item</th>-->
+<!--                                <th scope="col">UOM</th>-->
+<!--                                <th scope="col">Qty</th>-->
+<!--                                <th scope="col">Price</th>-->
+<!--                                <th scope="col">Amount</th>-->
+<!--&lt;!&ndash;                                <th scope="col">Action</th>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr th:each="o, iterator : ${orderHeaderDto.orderLineMList}">-->
+<!--                                <td th:text="${iterator.index}"></td>-->
+<!--                                <td th:text="${o.itemCode}"></td>-->
+<!--                                <td th:text="${o.orderUomCode}"></td>-->
+<!--                                <td th:text="${o.orderUomQty}"></td>-->
+<!--                                <td th:text="${o.price}"></td>-->
+<!--                                <td th:text="${o.amount}"></td>-->
+<!--&lt;!&ndash;                                <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <a class="btn btn-success" th:href="@{'/userPage/' + ${o.id}}"><span&ndash;&gt;-->
+<!--&lt;!&ndash;                                            class="glyphicon glyphicon-edit"></span></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <a class="btn btn-success" th:href="@{'/userAccessPage/' + ${o.id}}"><span&ndash;&gt;-->
+<!--&lt;!&ndash;                                            class="glyphicon glyphicon-plus-sign"></span></a>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                    || <a class="btn btn-danger" th:href="@{'/user/delete/' + ${u.id}}"><span&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                        class="glyphicon glyphicon-remove-circle"></span></a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+version: "3"
+services:
+   aye-authservice-server:
+     container_name: aye-authservice
+     environment:
+       TZ: Asia/Dhaka
+     build:
+#       context: authservice-service
+       dockerfile: Dockerfile
+     image: aye-authservice-0.0.1:latest
+     ports:
+     - 8084:8084

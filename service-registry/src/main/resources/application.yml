@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-registry
+server:
+  port: 8760
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8760/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  server:
+    enable-self-preservation: false
+    wait-time-in-ms-when-sync-empty: 0
+    peer-eureka-nodes-update-interval-ms: 600000
+    enable-peer-to-peer-replication: false

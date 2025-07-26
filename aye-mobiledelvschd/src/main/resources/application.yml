@@ -1,0 +1,30 @@
+spring:
+  data:
+    mongodb:
+      database: mobileAppBackendDb
+      host: localhost
+      port: 27017
+  main:
+    allow-bean-definition-overriding: 'true'
+  mvc:
+    log-request-details: true
+  application:
+    name: DELIVERY-SCHEDULE-SERVICE
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+server:
+  port: 8083
+  servlet:
+    context-path: /msales/api/dlv/
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://172.20.1.225:8760/eureka
